@@ -1,0 +1,126 @@
+Body {
+  font-family: Calibri, Helvetica, sans-serif;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.welcome--mobile {
+  display: none;
+}
+.singup--form {
+  border: 1px solid transparent;
+  margin: 0;
+}
+.singup--container {
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 30vw;
+  margin: auto;
+  padding: 5px 15px;
+}
+.Create--Account {
+  font-weight: 400;
+  margin: 4px 0px;
+}
+.singup--container > label {
+  font-weight: 500;
+}
+.privacy--notice {
+  font-weight: 400;
+  font-size: 12px;
+}
+.signup--button {
+  background-color: #2e0052;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  margin: 5px 0px;
+  border: none;
+  cursor: pointer;
+}
+
+.singup--form input {
+  width: 100%;
+  margin: 3px 0;
+  padding: 5px 20px;
+  display: inline-block;
+  border: 1px solid #b6b6b6;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.signup--button:hover {
+  opacity: 0.7;
+}
+
+/* nav and footer and logo image css */
+.signup--center > img {
+  width: auto;
+  height: 38px;
+  margin: 2% auto 1% auto;
+}
+.music--Logo--ForMobile {
+  display: none;
+}
+.mobilenav {
+  width: 100%;
+  height: 50px;
+  display: none;
+}
+.footerWEB > img {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.enrolling--message {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media screen and (max-width: 956px) {
+  .singup--container {
+    width: 60vw;
+    padding: 4vw;
+  }
+  .new--to--cart,
+  .create--your--account--button {
+    width: 66vw;
+    padding: 1vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mobilenav {
+    width: 100%;
+    height: 50px;
+    display: inline;
+  }
+  .music--Logo--ForMobile {
+    display: inline;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+  }
+  .signup--center > img {
+    display: none;
+  }
+  .welcome--mobile {
+    display: block;
+    font-weight: 400;
+    font-size: 45px;
+    margin: 60px 0px 0px 30px;
+    color: #2e0052;
+  }
+  .singup--form {
+    margin-top: 2vh;
+  }
+  .singup--container {
+    width: 77vw;
+    padding: 4vw;
+  }
+  .new--to--cart,
+  .create--your--account--button {
+    width: 83vw;
+  }
+}

@@ -1,8 +1,8 @@
-
+import PageRoute from "./Routes/pageRoute";
 function App() {
   return (
     <div className="App">
-      <p>Hello World!</p>
+      <PageRoute />
     </div>
   );
 }
