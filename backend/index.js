@@ -1,13 +1,14 @@
 import express from "express";
-import "./db connection/mongoo.js";
 import dotenv from "dotenv";
 import router from "./Routes/userRoute.js";
+import cors from "cors"
 
 const app = express();
 dotenv.config();
-app.use(router);
 app.use(express.json());
+app.use(cors())
+app.use(router);
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => console.log(` app running on port ${PORT}!`));
