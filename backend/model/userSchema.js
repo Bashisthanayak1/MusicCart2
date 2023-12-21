@@ -5,6 +5,7 @@ const userScehma = new mongoose.Schema({
   mobile: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  mycart: [{ id: String }],
 });
 
 const UserModel = mongoose.model("user", userScehma);

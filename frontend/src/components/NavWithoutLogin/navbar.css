@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.homePage--Navbar {
+  border: 1px solid red;
+  width: 100vw;
+  height: auto;
+}
+.homePage--Navbar > img {
+  width: 100%;
+  height: 50px;
+}
+.navInfo {
+  border: 1px solid transparent;
+  width: 98vw;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  position: absolute;
+  top: 0;
+  margin-left: 1vw;
+}
+.login--SignButton {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
