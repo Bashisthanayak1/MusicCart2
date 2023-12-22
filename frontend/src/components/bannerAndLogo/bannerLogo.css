@@ -8,8 +8,7 @@
   border: 1px solid red;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  font-size: 12px;
+  justify-content: space-between;
 }
 .logo {
   width: 90px;
@@ -17,10 +16,26 @@
 .space {
   width: 10px;
 }
+.logo--div > div:nth-child(1) {
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+.viewcart {
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.viewcart > img {
+  width: 80px;
+}
 
 .banner > img {
   display: block;
   width: 100%;
   margin: auto;
-  transform: scaleX(1) scaleY(.7) ;
+  transform: scaleX(1) scaleY(0.7);
 }

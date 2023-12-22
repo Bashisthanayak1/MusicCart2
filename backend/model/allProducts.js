@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-
 const productScehma = new mongoose.Schema({
   ProdectImage: { type: String },
   Company: { type: String },
+  Model: { type: String },
   Productprice: { type: Number },
+  ProductColor: { type: String },
   Heaadphonetype: { type: String },
 });
 

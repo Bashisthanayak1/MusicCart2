@@ -8,7 +8,7 @@
   justify-content: flex-start;
   height: 40px;
 }
-.search--div > input {
+.search--div input,.search--div form {
   border: 1px solid #c8c8c8;
   border-left: transparent;
   height: 100%;
@@ -72,24 +72,127 @@ option {
   width: 90vw;
   height: auto;
   margin: 10px auto;
-  padding: 5px 0px;
+  padding: 20px 0px;
+}
+.allProduct--container--Child {
+  border: 2px dotted black;
+  width: auto;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
 }
 .Asingle--Product--div {
   border: 1px solid red;
-  width: 18%;
-  height: 280px;
+  width: 200px;
+  height: auto;
+  font-weight: 600;
+  padding: 10px 6px;
+  margin-left: 0.5vw;
+  font-size: 12px;
 }
+
 .Asingle--Product--div > .blueColor {
   width: 100%;
-  height: 70%;
+  height: 190px;
   background-color: rgb(212, 229, 255);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+.cartDIV {
+  border: 1px solid transparent;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  right: 3px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+.fa-cart-plus {
+  color: green;
+  cursor: pointer;
+}
+.fa-cart-plus:hover {
+  transform: scale(0.9);
 }
 .Asingle--Product--div > .blueColor > img {
-  width: 53%;
+  width: 75%;
 }
 .Asingle--Product--div p {
   margin: 1px;
+  margin-left: 12px;
+}
+.footerWEB > img {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+.Details {
+  display: none;
+}
+
+/* LineView--Activate css ============================*/
+
+.LineView--Activate {
+  border: 2px dotted black;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+.LineView--Activate > .Asingle--Product--div {
+  border: 1px solid red;
+  width: 90%;
+  height: 200px;
+  font-weight: 600;
+  padding: 10px 6px;
+  margin-left: 0.5vw;
+  font-size: 12px;
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+}
+.LineView--Activate .blueColor {
+  width: 20%;
+  height: 100%;
+  background-color: rgb(212, 229, 255);
+  position: relative;
+}
+/* .blueColor img{
+transform: scale(1);
+} */
+.LineView--Activate .productDetails {
+  border: 1px dotted green;
+  width: 50%;
+  height: 90%;
+  margin-left: 15px;
+}
+.LineView--Activate .productDetails p {
+  margin-top: 5px;
+  font-weight: 500;
+}
+.LineView--Activate .productName,
+.LineView--Activate .model {
+  font-weight: 700;
+  font-size: 17px;
+}
+.LineView--Activate .Details {
+  display: block;
+  margin-left: 11px;
+  border-radius: 20px;
+  border-color: transparent;
+  padding: 2px 9px;
+  cursor: pointer;
+  background-color: rgb(46, 0, 82);
+  color: white;
+  margin-top: 5px;
 }
