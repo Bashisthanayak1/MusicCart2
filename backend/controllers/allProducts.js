@@ -13,8 +13,11 @@ const addAllProduct = async (req, res) => {
         Model: obj.Model,
         Productprice: obj.Productprice,
         ProductColor: obj.ProductColor,
-        ProductColor: obj.ProductColor,
         Heaadphonetype: obj.Heaadphonetype,
+        Productheadline: obj.Productheadline,
+        Aboutitem: obj.Aboutitem,
+        ratings: obj.ratings,
+        Available: obj.Available,
       });
     });
     res.status(200).send({
@@ -28,23 +31,66 @@ const addAllProduct = async (req, res) => {
   }
 };
 
-// getting all products
-const getAllProduct = async (req, res) => {
+// getting all products / based on filters <===========================>
+const getProduct = async (req, res) => {
   try {
-    const getdata = await AllProductModel.find();
-    if (getdata) {
-      res.status(200).send(getdata);
+    console.log("req.query", req.query);
+
+    let filters = {};
+    if (req.query.all) {
+      // Handle filtering
+      if (req.query.all.Select_Headphone_Type) {
+        filters.Heaadphonetype = {
+          $regex: new RegExp(req.query.all.Select_Headphone_Type, "i"),
+        };
+      }
+
+      if (req.query.all.Company) {
+        filters.Company = { $regex: new RegExp(req.query.all.Company, "i") };
+      }
+
+      if (req.query.all.Colour) {
+        filters.ProductColor = {
+          $regex: new RegExp(req.query.all.Colour, "i"),
+        };
+      }
+
+      if (req.query.all.Price) {
+        const priceRange = req.query.all.Price.split("-");
+        filters.Productprice = {
+          $gte: parseFloat(priceRange[0]),
+          $lte: parseFloat(priceRange[1]),
+        };
+      }
+
+      // Handle sorting
+      let sortOption = {};
+      if (
+        req.query.all.Sort_by &&
+        req.query.all.Sort_by !== "Sort_by_Feature"
+      ) {
+        if (req.query.all.Sort_by === "Highest") {
+          sortOption["Productprice"] = -1; // Sort by price in descending order
+        } else if (req.query.all.Sort_by === "Lowest") {
+          sortOption["Productprice"] = 1; // Sort by price in ascending order
+        } else if (req.query.all.Sort_by === "A-Z") {
+          sortOption["Model"] = 1; // Sort alphabetically by Model in ascending order
+        } else if (req.query.all.Sort_by === "Z-A") {
+          sortOption["Model"] = -1; // Sort alphabetically by Model in descending order
+        }
+      }
+      // MongoDB query
+      console.log("filters;-", filters);
+      const results = await AllProductModel.find(filters).sort(sortOption);
+      res.status(200).json(results);
     } else {
-      return res.status(400).send({
-        message: "unable to get allproduct data",
-      });
+      const results = await AllProductModel.find();
+      res.status(200).json(results);
     }
   } catch (error) {
-    console.log(error.message);
-    res.status(400).send({
-      message: "api error cant get data ",
-    });
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-export { addAllProduct, getAllProduct };
+export { addAllProduct, getProduct };

@@ -7,6 +7,10 @@ const productScehma = new mongoose.Schema({
   Productprice: { type: Number },
   ProductColor: { type: String },
   Heaadphonetype: { type: String },
+  Productheadline: { type: String },
+  Aboutitem: { type: String },
+  ratings: { type: Number },
+  Available: { type: String },
 });
 
 const ProductModel = mongoose.model("allproducts", productScehma);

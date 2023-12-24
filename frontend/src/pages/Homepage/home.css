@@ -8,7 +8,8 @@
   justify-content: flex-start;
   height: 40px;
 }
-.search--div input,.search--div form {
+.search--div input,
+.search--div form {
   border: 1px solid #c8c8c8;
   border-left: transparent;
   height: 100%;
@@ -131,15 +132,21 @@ option {
   margin: 1px;
   margin-left: 12px;
 }
-.footerWEB > img {
+
+.footerWEB--IMAGE {
+  border: 2px dotted red;
+  height: 50px;
   width: 100%;
-  position: sticky;
+  position: static;
   bottom: 0;
+  margin-top: 10vh;
 }
 .Details {
   display: none;
 }
-
+.HeadLine {
+  display: none;
+}
 /* LineView--Activate css ============================*/
 
 .LineView--Activate {
@@ -177,7 +184,7 @@ transform: scale(1);
   margin-left: 15px;
 }
 .LineView--Activate .productDetails p {
-  margin-top: 5px;
+  margin-top: 7px;
   font-weight: 500;
 }
 .LineView--Activate .productName,
@@ -190,9 +197,14 @@ transform: scale(1);
   margin-left: 11px;
   border-radius: 20px;
   border-color: transparent;
-  padding: 2px 9px;
+  padding: 2px 13px;
   cursor: pointer;
   background-color: rgb(46, 0, 82);
   color: white;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+.LineView--Activate .HeadLine {
+  border: 2px solid transparent;
+  display: block;
+  padding: 2px 0px;
 }
