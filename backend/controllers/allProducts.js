@@ -1,7 +1,7 @@
 import AllProductModel from "../model/allProducts.js";
 import "../db connection/mongoo.js";
 
-// Posting all products
+// Posting all products =======================================>
 const addAllProduct = async (req, res) => {
   try {
     const arr = req.body;
@@ -93,4 +93,25 @@ const getProduct = async (req, res) => {
   }
 };
 
-export { addAllProduct, getProduct };
+// geting product by id =======================================
+
+const ById = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const product = await AllProductModel.find({ _id }, { __v: 0 });
+    if (product) {
+      return res
+        .status(200)
+        .send({ IsFound: true, message: "item found", product });
+    } else {
+      return res
+        .status(404)
+        .send({ IsFound: false, message: "item not found", product });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "unable to get product by its _id" });
+  }
+};
+
+export { addAllProduct, getProduct, ById };

@@ -1,23 +1,29 @@
 import React from "react";
 import Logo from "../../assets/images/musicCartLogo.png";
-import "./bannerLogo.css";
-import Banner from "../../assets/images/homePageBanner.png";
+import "./LogoAndCart.css";
 import Viewcart from "../../assets/images/viewCartImage.png";
-const bannerLogo = () => {
+import { Link } from "react-router-dom";
+
+const bannerLogo = (props) => {
   return (
     <div className="logo--and--banner">
       <div className="logo--div">
         <div>
           <img src={Logo} alt="Logo" className="logo" />
           <p className="space"></p>
-          <p> Home</p>
+          <Link to="/home" className="Link">
+            Home
+          </Link>
+          {/* IF these details provied then show on page */}
+          {props.ProductName && props.ProductModel && (
+            <p>
+              / {props.ProductName} {props.ProductModel}
+            </p>
+          )}
         </div>
         <div className="viewcart">
           <img src={Viewcart} alt="" />
         </div>
-      </div>
-      <div className="banner">
-        <img src={Banner} alt="banner" />
       </div>
     </div>
   );

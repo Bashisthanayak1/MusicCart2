@@ -2,7 +2,7 @@ import React from "react";
 import BlankNavbar from "../../assets/images/mobileLoginNav.png";
 import "./navbar.css";
 import { Link } from "react-router-dom";
-const NavWithoutLogin = () => {
+const NavWithoutLogin = (props) => {
   return (
     <div>
       <nav className="homePage--Navbar">
@@ -18,16 +18,28 @@ const NavWithoutLogin = () => {
         </div>
         <div>
           <span>
-            {" "}
-            <Link className="login--SignButton" to="/login">
-              Login
-            </Link>{" "}
-          </span>{" "}
-          |{" "}
+            {props.Login && (
+              <Link className="login--SignButton" to="/login">
+                Login
+              </Link>
+            )}
+          </span>
           <span>
-            <Link className="login--SignButton" to="/signup">
-              Signup
-            </Link>{" "}
+            {props.Signup && (
+              <>
+                <span> | </span>
+                <Link className="login--SignButton" to="/signup">
+                  Signup
+                </Link>
+              </>
+            )}
+          </span>
+          <span>
+            {props.Logout && (
+              <Link className="login--SignButton" to="/login">
+                Logout
+              </Link>
+            )}
           </span>
         </div>
       </div>

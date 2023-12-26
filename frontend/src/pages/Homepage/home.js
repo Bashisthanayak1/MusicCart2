@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import NavWithoutLogin from "../../components/NavWithoutLogin/navWithoutLogin";
-import BannerLogo from "../../components/bannerAndLogo/bannerLogo";
+import NavBar from "../../components/NavBar/navbar.js";
+import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
 import "./home.css";
 import searchicon from "../../assets/images/searchicon.png";
 import GridBLACK from "../../assets/images/gridBLACK.png";
@@ -10,8 +10,12 @@ import LineBLACK from "../../assets/images/lineBLACK.png";
 import axios from "axios";
 import serverUrl from "../../config.js";
 import footerWEB from "../../assets/images/footerWEB.png";
+import { useNavigate } from "react-router-dom";
+import Banner from "../../assets/images/homePageBanner.png";
 
 const Home = () => {
+  const Navigate = useNavigate();
+
   const [gridBLACK, setGridImage] = useState(true);
   const [lineWHITE, setLineImage] = useState(true);
   const [AllData, setAllData] = useState([]);
@@ -71,7 +75,8 @@ const Home = () => {
   const SubmitForm = (event) => {
     event.preventDefault();
     let inputValue = inputRef.current.value;
-    getData(inputValue);
+    console.log("inputValue:-", inputValue);
+    getData({ Company: inputValue });
     console.log("SubmitForm", inputValue);
     inputRef.current.value = "";
   };
@@ -100,12 +105,20 @@ const Home = () => {
     }
   }, [filteredData]);
 
+  // function triggers when we click on a product
+  function clickAproduct(_id) {
+    Navigate(`/productDetail/${_id}`);
+  }
   // =========================================== END ==================================================>
 
   return (
     <>
-      <NavWithoutLogin />
-      <BannerLogo />
+      <NavBar Login={"Login"} Signup={"Signup"} />
+      <BannerAndCart />
+
+      <div className="banner">
+        <img src={Banner} alt="banner" />
+      </div>
 
       <div className="search--div">
         <img src={searchicon} className="searchicon" alt="searchicon" />
@@ -232,7 +245,13 @@ const Home = () => {
         >
           {AllData.map((obj, i) => (
             <>
-              <div className="Asingle--Product--div" key={obj._id}>
+              <d
+                iv
+                className="Asingle--Product--div"
+                key={obj._id}
+                storekey={obj._id}
+                onClick={() => clickAproduct(obj._id)}
+              >
                 <div className="blueColor" key={obj._id}>
                   <img src={obj.ProdectImage} alt="productImg" />
                   <div className="cartDIV" style={{ display: "none" }}>
@@ -254,7 +273,7 @@ const Home = () => {
                   <p className="HeadLine">{obj.Productheadline}</p>
                   <button className="Details">Details</button>
                 </div>
-              </div>
+              </d>
             </>
           ))}
         </div>

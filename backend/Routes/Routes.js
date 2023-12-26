@@ -1,7 +1,7 @@
 import express from "express";
 import { signupRoute, loginRoute } from "../controllers/userController.js";
 // import isAuthenticated from "../middlewares/jwt.js";
-import { addAllProduct, getProduct } from "../controllers/allProducts.js";
+import { addAllProduct, getProduct, ById } from "../controllers/allProducts.js";
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.post("/allproduct", addAllProduct);
 
 // to get all products data
 router.get("/getProduct", getProduct);
+
+// get product by id
+router.get("/productID/:_id", ById);
 
 export default router;

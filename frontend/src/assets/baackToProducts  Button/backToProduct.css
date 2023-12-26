@@ -1,0 +1,8 @@
+.Back--to--products {
+  background-color: rgb(46, 0, 82);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 30px 0px 20px 5%;
+}

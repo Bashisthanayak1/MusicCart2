@@ -1,0 +1,122 @@
+.Productheadline {
+  border: 1px solid red;
+  width: 90vw;
+  margin: auto;
+}
+.PhotoANDdetails {
+  border: 1px solid black;
+  width: 90vw;
+  height: auto;
+  margin: 20px auto 0px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .PhotoANDdetails > div {
+  border: 1px dotted green;
+  width: 45%;
+  height: auto;
+} */
+.PhotoANDdetails * {
+  margin: 0;
+}
+
+.PhotoANDdetails > div:nth-child(1) {
+  border: 2px dotted green;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.productPhoto > img {
+  border: 3px solid black;
+  display: block;
+  max-width: 79%;
+  border-radius: 5px;
+  display: block;
+  margin: auto;
+}
+.PhotoANDdetails > div:nth-child(2) {
+  border: 2px dotted green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%;
+  /* height: 350px; */
+}
+
+.RatingsIcon--div {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+}
+.RatingsIcon--div {
+  color: rgb(255, 214, 0);
+  font-size: 12px;
+}
+.RatingsIcon--div > p {
+  color: black;
+}
+.price {
+  font-weight: 600;
+  font-size: 14px;
+}
+.ProductColor--name {
+  font-size: 14px;
+}
+.Available,
+.Brand {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+}
+.Aboutitem {
+  border: 1px solid red;
+  padding: 5px;
+  font-size: 10px;
+}
+.Aboutitem > li {
+  margin-top: 4px;
+  font-weight: 400;
+}
+.ThreeIMG {
+  border: 1px solid red;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.ThreeIMG > img {
+  border: 1px solid black;
+  width: 95px;
+  height: 80px;
+  border-radius: 5px;
+}
+.Button {
+  margin-top: 20px;
+}
+.Button > button {
+  display: block;
+  width: 50%;
+  padding: 3px 30px;
+  border-radius: 20px;
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+.Button > button:first-child {
+  background-color: rgb(255, 214, 0);
+}
+.Button > button:last-child {
+  background-color: rgb(255, 184, 0);
+  margin-top: 10px;
+}
+.footerWEB--IMAGE {
+  border: 2px dotted red;
+  height: 50px;
+  width: 100%;
+  position: static;
+  bottom: 0;
+  margin-top: 5vh;
+}
