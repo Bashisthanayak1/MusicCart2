@@ -11,6 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  // clearing session storage
+  sessionStorage.removeItem("jwttoken");
+
   const Navigate = useNavigate();
   const [UserDetails, setUserdetails] = useState({
     mobileORemail: "",
@@ -35,10 +38,9 @@ const Login = () => {
           progress: undefined,
           theme: "light",
         });
-        await sessionStorage.setItem(
-          "jwttoken",
-          JSON.stringify(result.jwttoken)
-        );
+
+        // saving jwt token in session storage
+        sessionStorage.setItem("jwttoken", JSON.stringify(result.jwttoken));
 
         setTimeout(() => {
           Navigate("/home");

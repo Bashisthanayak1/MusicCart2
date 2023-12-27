@@ -20,10 +20,13 @@ const bannerLogo = (props) => {
               / {props.ProductName} {props.ProductModel}
             </p>
           )}
+          {props.ViewCart && <p> {props.ViewCart}</p>}
         </div>
-        <div className="viewcart">
-          <img src={Viewcart} alt="" />
-        </div>
+        {props.isLoggedIn === "true" && (
+          <div className="viewcart">
+            <img src={Viewcart} alt="" />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../../components/NavBar/navbar.js";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
-import "./home.css";
 import searchicon from "../../assets/images/searchicon.png";
 import GridBLACK from "../../assets/images/gridBLACK.png";
 import GridWHITE from "../../assets/images/gridWHITE.png";
@@ -12,10 +11,13 @@ import serverUrl from "../../config.js";
 import footerWEB from "../../assets/images/footerWEB.png";
 import { useNavigate } from "react-router-dom";
 import Banner from "../../assets/images/homePageBanner.png";
+import { ToastContainer, toast } from "react-toastify";
+import "./home.css";
 
 const Home = () => {
   const Navigate = useNavigate();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [gridBLACK, setGridImage] = useState(true);
   const [lineWHITE, setLineImage] = useState(true);
   const [AllData, setAllData] = useState([]);
@@ -26,6 +28,37 @@ const Home = () => {
     Price: "",
     Sort_by: "",
   });
+
+  // checking if user logged or not  ++++++++++++++++++++++++++++++++
+  const jwttoken = sessionStorage.getItem("jwttoken");
+  useEffect(() => {
+    async function test() {
+      if (!jwttoken) {
+        return;
+      }
+
+      try {
+        const isTokenValid = await axios.post(
+          `${serverUrl}/isAuthenticated`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${jwttoken}`,
+            },
+          }
+        );
+        console.log("isTokenValid:- ", isTokenValid);
+        isTokenValid && setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Error checking token validity:", error);
+        setIsLoggedIn(false);
+      }
+    }
+
+    test();
+  }, [jwttoken]);
+
   // Create a ref for the input element ++++++++++++++++++++++++++++++++
   const inputRef = useRef();
 
@@ -41,7 +74,7 @@ const Home = () => {
     setGridImage((pre) => !pre);
   }
 
-  // get all product data  ++++++++++++++++
+  // get all product data  +++++++++++++++++++++++++++++++++++++
 
   useEffect(() => {
     // Fetch all product data when the component mounts
@@ -49,7 +82,7 @@ const Home = () => {
       try {
         const result = await axios.get(`${serverUrl}/getProduct`);
         setAllData(result.data);
-        console.log("Getdata-", result.data);
+        // console.log("Getdata-", result.data);
       } catch (error) {
         console.log("Getdata error:- ", error);
       }
@@ -91,7 +124,7 @@ const Home = () => {
     });
   };
 
-  // Log the filteredData when it changes+++++++++++++++++++++++++++++
+  // Log the filteredData when it changes +++++++++++++++++++++++++++++
   useEffect(() => {
     if (
       filteredData.Select_Headphone_Type !== "" ||
@@ -105,16 +138,36 @@ const Home = () => {
     }
   }, [filteredData]);
 
-  // function triggers when we click on a product
+  // function triggers when we click on a product +++++++++++++++++++++++++++++
   function clickAproduct(_id) {
     Navigate(`/productDetail/${_id}`);
+  }
+
+  // click AddToCart +++++++++++++++++++++++++++++
+  function AddToCart(event) {
+    event.stopPropagation();
+    toast.success("Product added to cart", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
   // =========================================== END ==================================================>
 
   return (
     <>
-      <NavBar Login={"Login"} Signup={"Signup"} />
-      <BannerAndCart />
+      <ToastContainer />
+      <NavBar
+        Login={!isLoggedIn && "Login"}
+        Signup={!isLoggedIn && "Signup"}
+        Logout={isLoggedIn && "Logout"}
+      />
+      <BannerAndCart isLoggedIn={isLoggedIn ? "true" : "false"} />
 
       <div className="banner">
         <img src={Banner} alt="banner" />
@@ -254,8 +307,14 @@ const Home = () => {
               >
                 <div className="blueColor" key={obj._id}>
                   <img src={obj.ProdectImage} alt="productImg" />
-                  <div className="cartDIV" style={{ display: "none" }}>
-                    <i className="fa-solid fa-cart-plus"></i>
+                  <div
+                    className="cartDIV"
+                    style={{ display: !isLoggedIn && "none" }}
+                  >
+                    <i
+                      className="fa-solid fa-cart-plus"
+                      onClick={AddToCart}
+                    ></i>
                   </div>
                 </div>
                 <div className="productDetails" key={i}>

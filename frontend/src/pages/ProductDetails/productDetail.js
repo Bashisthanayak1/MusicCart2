@@ -5,12 +5,15 @@ import NavBar from "../../components/NavBar/navbar";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
 import BackToProductBUTTON from "../../assets/baackToProducts  Button/backToProduct.js";
 import footerWEB from "../../assets/images/footerWEB.png";
+import serverUrl from "../../config.js";
 
 import "./productDetails.css";
 
 const ProductDetail = () => {
   //acessing the id we are getting from URL(from homepage product)
   const { _id } = useParams();
+  // loggedin user _id
+  const user_id = "6583e6c3863c2ee5dd04206d";
 
   const [ProductDetails, setProductDetails] = useState({
     productDetails: "",
@@ -20,9 +23,7 @@ const ProductDetail = () => {
     const fetchData = async () => {
       try {
         console.log("ProductDetail URL ID: - ", _id);
-        const result = await axios.get(
-          `http://localhost:7000/productID/${_id}`
-        );
+        const result = await axios.get(`${serverUrl}/productID/${_id}`);
         setProductDetails(result.data.product[0]);
         console.log(result.data.product[0]);
       } catch (error) {
@@ -32,6 +33,15 @@ const ProductDetail = () => {
 
     fetchData();
   }, [_id]);
+
+  // function triggers when we click add to cart
+  let count = 0;
+  function ClickAddToCart() {
+    console.log("AddToCart clicked");
+    count++;
+    const obj = { productID: _id, number: count };
+    axios.post(`${serverUrl}/addToCART/${user_id}`, obj);
+  }
 
   return (
     <>
@@ -87,7 +97,7 @@ const ProductDetail = () => {
           </div>
 
           <div className="Button">
-            <button>Add cart</button>
+            <button onClick={ClickAddToCart}>Add cart</button>
             <button>Buy Now</button>
           </div>
         </div>
