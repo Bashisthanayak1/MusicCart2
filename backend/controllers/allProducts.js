@@ -1,7 +1,7 @@
 import AllProductModel from "../model/allProducts.js";
 import "../db connection/mongoo.js";
 
-// Posting all products =======================================>
+// Posting all products/data =======================================>
 const addAllProduct = async (req, res) => {
   try {
     const arr = req.body;
@@ -32,7 +32,7 @@ const addAllProduct = async (req, res) => {
 };
 
 // getting all products / based on filters <===========================>
-const getProduct = async (req, res) => {
+const filterProduct = async (req, res) => {
   try {
     console.log("req.query", req.query);
 
@@ -93,9 +93,9 @@ const getProduct = async (req, res) => {
   }
 };
 
-// geting product by id =======================================
+// geting product by id =============================================================>
 
-const ById = async (req, res) => {
+const productById = async (req, res) => {
   try {
     const { _id } = req.params;
     const product = await AllProductModel.find({ _id }, { __v: 0 });
@@ -114,4 +114,4 @@ const ById = async (req, res) => {
   }
 };
 
-export { addAllProduct, getProduct, ById };
+export { addAllProduct, filterProduct, productById };

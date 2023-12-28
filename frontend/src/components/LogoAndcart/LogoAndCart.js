@@ -2,14 +2,24 @@ import React from "react";
 import Logo from "../../assets/images/musicCartLogo.png";
 import "./LogoAndCart.css";
 import Viewcart from "../../assets/images/viewCartImage.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const bannerLogo = (props) => {
+const BannerLogo = (props) => {
+  const Navigate = useNavigate();
+  // function when we click view cart image ++++++++++++++++++++++
+  function viewCart() {
+    Navigate("/viewCart");
+  }
   return (
     <div className="logo--and--banner">
       <div className="logo--div">
         <div>
-          <img src={Logo} alt="Logo" className="logo" />
+          <img
+            src={Logo}
+            alt="Logo"
+            className="logo"
+            onClick={() => Navigate("/home")}
+          />
           <p className="space"></p>
           <Link to="/home" className="Link">
             Home
@@ -24,7 +34,7 @@ const bannerLogo = (props) => {
         </div>
         {props.isLoggedIn === "true" && (
           <div className="viewcart">
-            <img src={Viewcart} alt="" />
+            <img src={Viewcart} alt="Viewcart" onClick={viewCart} />
           </div>
         )}
       </div>
@@ -32,4 +42,4 @@ const bannerLogo = (props) => {
   );
 };
 
-export default bannerLogo;
+export default BannerLogo;

@@ -60,7 +60,7 @@ const signupRoute = async (req, res) => {
         const jwttoken = jwt.sign(
           usercreated.toJSON(),
           process.env.JWT_SECRET_KEY,
-          { expiresIn: "40s" }
+          { expiresIn: "40m" }
         );
 
         console.log("user added");
@@ -133,7 +133,8 @@ const addToCart = async (req, res) => {
   try {
     const obj = await req.body;
     const userID = await req.params.userID;
-    // console.log("addToCart obj:-", obj);
+
+    console.log("addToCart obj:-", obj);
     // console.log("addToCart userID:-", userID);
 
     // Check if the product with obj.productID already exists in mycart
@@ -146,12 +147,11 @@ const addToCart = async (req, res) => {
       // Product already exists, and number is incremented
       const user = await UserModel.updateOne(
         { _id: userID, "mycart.productID": obj.productID },
-        { $inc: { "mycart.$.number": 1 } }
+        { $inc: { "mycart.$.quantity": 1 } }
       );
 
       // Handle the result if needed
-      console.log("user- ", user);
-
+      // console.log("user- ", user);
       // Send a response
       return res.status(200).json({ message: "Item quantity updated in cart" });
     }
@@ -159,11 +159,11 @@ const addToCart = async (req, res) => {
     // Product does not exist in mycart, add it with number 1
     const user = await UserModel.updateOne(
       { _id: userID },
-      { $push: { mycart: { ...obj, number: 1 } } }
+      { $push: { mycart: { ...obj, quantity: 1 } } }
     );
 
     // Handle the result if needed
-    console.log("user- ", user);
+    // console.log("user- ", user);
 
     // Send a response
     return res.status(200).json({ message: "Item added to cart successfully" });
@@ -172,5 +172,18 @@ const addToCart = async (req, res) => {
     return res.status(400).json({ message: "Unable to add to cart" });
   }
 };
-
-export { signupRoute, loginRoute, addToCart };
+//  +++++++++++++++++++++++++++++++*********   getting a user cartArray by user _id  **********==================================================
+const getUserDetails = async (req, res) => {
+  try {
+    const _id =await req.params._id;
+    const User = await UserModel.findById(_id);
+    console.log("findUser:- ", User);
+    User
+      ? res.status(200).json({ message: "userFound by the _id", User })
+      : res.status(400).json({ message: "user noy found by the _id" });
+  } catch (error) {
+    console.log("getUserDetails error", error);
+    return res.status(400).json({ message: "Unable to Get UserDetails" });
+  }
+};
+export { signupRoute, loginRoute, addToCart, getUserDetails };
