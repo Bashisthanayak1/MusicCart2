@@ -110,7 +110,7 @@ const loginRoute = async (req, res) => {
         const jwttoken = jwt.sign(
           userexists.toJSON(),
           process.env.JWT_SECRET_KEY,
-          { expiresIn: "30m" }
+          { expiresIn: "1d" }
         );
         // Set the token in the response headers
         return res
@@ -175,9 +175,9 @@ const addToCart = async (req, res) => {
 //  +++++++++++++++++++++++++++++++*********   getting a user cartArray by user _id  **********==================================================
 const getUserDetails = async (req, res) => {
   try {
-    const _id =await req.params._id;
+    const _id = await req.params._id;
     const User = await UserModel.findById(_id);
-    console.log("findUser:- ", User);
+    // console.log("findUser:- ", User);
     User
       ? res.status(200).json({ message: "userFound by the _id", User })
       : res.status(400).json({ message: "user noy found by the _id" });
@@ -186,4 +186,37 @@ const getUserDetails = async (req, res) => {
     return res.status(400).json({ message: "Unable to Get UserDetails" });
   }
 };
-export { signupRoute, loginRoute, addToCart, getUserDetails };
+
+// +++++++++++++++++++++++++++++++*********  geting user by id and updating its cart item Quentity *********+++++++++++++++++++++++++++++++
+const updateQuantity = async (req, res) => {
+  try {
+    const { productId, newQuantity } = req.body;
+    const { _id } = req.params;
+
+    const user = await UserModel.findByIdAndUpdate(
+      _id,
+      {
+        $set: {
+          "mycart.$[element].quantity": Number(newQuantity),
+        },
+      },
+      {
+        arrayFilters: [{ "element.productID": productId }],
+        new: true, // Return the modified document
+      }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log("user:- ", user.mycart);
+    return res.json(user);
+  } catch (error) {
+    console.log("updateQuantity error", error);
+    return res
+      .status(400)
+      .json({ message: "Unable to process updateQuantity API" });
+  }
+};
+
+export { signupRoute, loginRoute, addToCart, getUserDetails, updateQuantity };

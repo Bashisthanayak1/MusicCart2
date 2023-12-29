@@ -21,9 +21,11 @@ const BannerLogo = (props) => {
             onClick={() => Navigate("/home")}
           />
           <p className="space"></p>
-          <Link to="/home" className="Link">
-            Home
-          </Link>
+          {props.showHome && (
+            <Link to="/home" className="Link">
+              Home
+            </Link>
+          )}
           {/* IF these details provied then show on page */}
           {props.ProductName && props.ProductModel && (
             <p>
@@ -31,6 +33,7 @@ const BannerLogo = (props) => {
             </p>
           )}
           {props.ViewCart && <p> {props.ViewCart}</p>}
+          {props.Checkout && <p> {props.Checkout}</p>}
         </div>
         {props.isLoggedIn === "true" && (
           <div className="viewcart">

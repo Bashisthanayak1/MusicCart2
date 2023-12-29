@@ -1,7 +1,7 @@
 import AllProductModel from "../model/allProducts.js";
 import "../db connection/mongoo.js";
 
-// Posting all products/data =======================================>
+// Posting all products/data ========================================================================>
 const addAllProduct = async (req, res) => {
   try {
     const arr = req.body;
@@ -31,7 +31,7 @@ const addAllProduct = async (req, res) => {
   }
 };
 
-// getting all products / based on filters <===========================>
+// getting all products / based on filters <============================================================>
 const filterProduct = async (req, res) => {
   try {
     console.log("req.query", req.query);
@@ -113,5 +113,6 @@ const productById = async (req, res) => {
     res.status(500).json({ message: "unable to get product by its _id" });
   }
 };
+
 
 export { addAllProduct, filterProduct, productById };

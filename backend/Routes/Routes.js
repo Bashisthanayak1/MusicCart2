@@ -3,7 +3,8 @@ import {
   signupRoute,
   loginRoute,
   addToCart,
-  getUserDetails
+  getUserDetails,
+  updateQuantity,
 } from "../controllers/userController.js";
 import isAuthenticated from "../middlewares/jwt.js";
 import {
@@ -24,8 +25,6 @@ router.post("/allproduct", addAllProduct);
 // to get all products data
 router.get("/getProduct", filterProduct);
 
-
-
 // to add productsID in usercart
 router.post("/addToCART/:userID", addToCart);
 
@@ -36,6 +35,9 @@ router.get("/productID/:_id", productById);
 
 // getting user by a user_id
 router.get("/UserDetails/:_id", getUserDetails);
+
+// geting user by id and updating its cart item Quentity
+router.patch("/UpdateQuantity/:_id", updateQuantity);
 
 
 export default router;
