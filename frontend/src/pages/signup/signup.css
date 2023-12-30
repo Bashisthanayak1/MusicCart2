@@ -10,39 +10,47 @@ Body {
 .singup--form {
   border: 1px solid transparent;
   margin: 0;
+  padding: 5px 0px;
 }
 .singup--container {
   border: 1px solid #d9d9d9;
   border-radius: 5px;
-  width: 30vw;
+  width: 25vw;
+  /* height: 60vh; */
   margin: auto;
-  padding: 5px 15px;
+  padding: 1% 2% 0% 2%;
 }
 .Create--Account {
   font-weight: 400;
-  margin: 4px 0px;
+  margin: 1% 0;
+}
+.Create--Account > span {
+  display: none;
 }
 .singup--container > label {
   font-weight: 500;
+  font-size: 12px;
 }
 .privacy--notice {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
 }
 .signup--button {
   background-color: #2e0052;
   width: 100%;
   color: white;
-  padding: 10px;
-  margin: 5px 0px;
+  margin: 1% auto;
+  padding: 9px 0px;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .singup--form input {
   width: 100%;
   margin: 3px 0;
-  padding: 5px 20px;
+  /* padding: 5px 20px; */
+  height: 5vh;
   display: inline-block;
   border: 1px solid #b6b6b6;
   box-sizing: border-box;
@@ -52,12 +60,24 @@ Body {
 .signup--button:hover {
   opacity: 0.7;
 }
+.enrolling--message {
+  font-size: 11px;
+  font-weight: 500;
+  margin:2px 0;
+}
+.Already--have--an--account--div {
+  border: 1px dotted transparent;
+  margin-top: 2vh;
+}
+.Already--have--an--account--div > h4 {
+  margin: 0;
+}
 
 /* nav and footer and logo image css */
 .signup--center > img {
   width: auto;
   height: 38px;
-  margin: 2% auto 1% auto;
+  margin: 1% 0 0.5% auto;
 }
 .music--Logo--ForMobile {
   display: none;
@@ -72,23 +92,72 @@ Body {
   position: absolute;
   bottom: 0;
 }
-.enrolling--message {
-  font-size: 13px;
-  font-weight: 500;
-  margin: 0;
-}
-
-@media screen and (max-width: 956px) {
+@media screen and (max-width: 1000px) {
   .singup--container {
-    width: 60vw;
-    padding: 4vw;
-  }
-  .new--to--cart,
-  .create--your--account--button {
-    width: 66vw;
+    width: 40vw;
     padding: 1vw;
   }
 }
+@media screen and (max-width: 500px) {
+  .mobilenav {
+    width: 100%;
+    height: 50px;
+    display: inline;
+  }
+  .music--Logo--ForMobile {
+    display: inline;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+  }
+  .signup--center > img {
+    display: none;
+  }
+  .signup--welcome--mobile {
+    display: block;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0px 0px 0px 30px;
+    color: #2e0052;
+  }
+  .Create--Account {
+    font-weight: 500;
+  }
+  .Create--Account > span {
+    display: inline;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .singup--form {
+    margin-top: 1vh;
+    padding: 0;
+  }
+  .singup--container {
+    width: 79vw;
+    padding: 1vw;
+  }
+  .enrolling--message {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .singup--container {
+    width: 90vw;
+    padding: 1vw;
+  }
+  .Already--have--an--account--div > h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+  }
+  .signup--welcome--mobile {
+    margin: 0% 0% 0% 2%;
+  }
+}
+/* ************************************************************************ */
+/* 
+
 
 @media screen and (max-width: 500px) {
   .mobilenav {
@@ -123,4 +192,4 @@ Body {
   .create--your--account--button {
     width: 83vw;
   }
-}
+} */

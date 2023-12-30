@@ -44,7 +44,6 @@ const Signup = () => {
         setTimeout(() => {
           Navigate("/home");
         }, 2000);
-
       } else {
         toast.error(result.message, {
           position: "top-right",
@@ -88,7 +87,7 @@ const Signup = () => {
       <h2 className="signup--welcome--mobile">welcome</h2>
       <form action="" className="singup--form" onSubmit={handleSubmitForm}>
         <div className="singup--container">
-          <h3 className="Create--Account">Create Account</h3>
+          <h3 className="Create--Account">Create Account <span>Don’t have an account?</span></h3>
 
           <label>Your name </label>
           <input
@@ -139,7 +138,7 @@ const Signup = () => {
         </div>
       </form>
 
-      <center>
+      <center className="Already--have--an--account--div">
         <h4>
           Already have an account? <Link to="/login">Sign in</Link>{" "}
         </h4>
