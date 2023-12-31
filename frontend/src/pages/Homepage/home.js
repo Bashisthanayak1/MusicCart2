@@ -12,9 +12,7 @@ import footerWEB from "../../assets/images/footerWEB.png";
 import { useNavigate } from "react-router-dom";
 import Banner from "../../assets/images/homePageBanner.png";
 import { ToastContainer, toast } from "react-toastify";
-// import HomeIcon from "../../assets/images/HomeIcon.png";
-// import CartIcon from "../../assets/images/CartIcon.png";
-// import LogOutIcon from "../../assets/images/LogoutIcon.png";
+
 import FooterMobile from "../../components/footerForMobile/footerMobile.js";
 
 import "./home.css";
@@ -27,7 +25,6 @@ const Home = () => {
   const [lineWHITE, setLineImage] = useState(true);
   const [AllData, setAllData] = useState([]);
   const [user_id, setUser_id] = useState(null);
-
   const [filteredData, setFilteredData] = useState({
     Select_Headphone_Type: "",
     Company: "",
@@ -35,8 +32,21 @@ const Home = () => {
     Price: "",
     Sort_by: "",
   });
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // checking if user logged or not  ++++++++++++++++++++++++++++++++
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // checking if user logged or not  ++++++++++++++++++++++++++++++++ //
   const jwttoken = sessionStorage.getItem("jwttoken");
   useEffect(() => {
     async function test() {
@@ -336,13 +346,14 @@ const Home = () => {
       <div className="allProduct--container">
         <div
           className={
-            gridBLACK ? "allProduct--container--Child" : "LineView--Activate"
+            gridBLACK || screenWidth <= 480
+              ? "allProduct--container--Child"
+              : "LineView--Activate"
           }
         >
           {AllData.map((obj, i) => (
             <>
-              <d
-                iv
+              <div
                 className="Asingle--Product--div"
                 key={obj._id}
                 storekey={obj._id}
@@ -373,7 +384,7 @@ const Home = () => {
                   <p className="HeadLine">{obj.Productheadline}</p>
                   <button className="Details">Details</button>
                 </div>
-              </d>
+              </div>
             </>
           ))}
         </div>
