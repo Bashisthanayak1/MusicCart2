@@ -13,6 +13,7 @@ import "./login.css";
 const Login = () => {
   // clearing session storage
   sessionStorage.removeItem("jwttoken");
+  sessionStorage.removeItem("directBuy");
 
   const Navigate = useNavigate();
   const [UserDetails, setUserdetails] = useState({
@@ -80,9 +81,14 @@ const Login = () => {
         src={MusicLogoMobile}
         alt="MusicLogoMobile"
         className="login--music--Logo--ForMobile"
+        onClick={() => Navigate("/home")}
       />
       <center className="loginPage--centerTag">
-        <img src={MusicLogo} alt="MusicLogo" />
+        <img
+          src={MusicLogo}
+          alt="MusicLogo"
+          onClick={() => Navigate("/home")}
+        />
       </center>
       <h2 className="login--welcome--mobile">welcome</h2>
       <form action="" id="login--form" onSubmit={handleSubmitForm}>

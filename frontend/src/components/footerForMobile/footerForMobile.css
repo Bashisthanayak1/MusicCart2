@@ -1,0 +1,27 @@
+.footer--forMobile {
+  display: block;
+  border: 1px solid;
+  border-color: rgba(200, 200, 200, 1) transparent transparent transparent;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer--forMobile > div {
+  border-top: 6px solid transparent;
+  text-align: center;
+  padding: 3px;
+  border-radius: 4px;
+}
+.footer--forMobile > div.selected {
+  border-color: rgba(46, 0, 82, 1) transparent transparent;
+}
+.footer--forMobile > div > p {
+  margin: 0;
+  font-weight: 500;
+}
+.footer--forMobile > div:last-child > span {
+  font-size: 18px;
+  font-weight: bolder;
+}

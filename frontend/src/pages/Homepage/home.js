@@ -1,23 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../../components/NavBar/navbar.js";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
+import axios from "axios";
+import serverUrl from "../../config.js";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import FooterMobile from "../../components/footerForMobile/footerMobile.js";
 import searchicon from "../../assets/images/searchicon.png";
 import GridBLACK from "../../assets/images/gridBLACK.png";
 import GridWHITE from "../../assets/images/gridWHITE.png";
 import LineWHITE from "../../assets/images//lineWHITE.png";
 import LineBLACK from "../../assets/images/lineBLACK.png";
-import axios from "axios";
-import serverUrl from "../../config.js";
 import footerWEB from "../../assets/images/footerWEB.png";
-import { useNavigate } from "react-router-dom";
 import Banner from "../../assets/images/homePageBanner.png";
-import { ToastContainer, toast } from "react-toastify";
-
-import FooterMobile from "../../components/footerForMobile/footerMobile.js";
-
 import "./home.css";
 
 const Home = () => {
+  sessionStorage.removeItem("directBuy");
+
   const Navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -106,10 +106,10 @@ const Home = () => {
       }
     };
 
-    fetchData(); // Call the fetchData function
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+    fetchData();
+  }, []);
 
-  /// Function to fetch data based on search input+++++++++++++++++++++++++++++
+  // Function to fetch data based on search input+++++++++++++++++++++++++++++
   const getData = async (input) => {
     try {
       const result = await axios.get(`${serverUrl}/getProduct`, {
@@ -126,6 +126,7 @@ const Home = () => {
   const SubmitForm = (event) => {
     event.preventDefault();
     let inputValue = inputRef.current.value;
+    // calling getData function
     getData({ Company: inputValue });
     console.log("SubmitForm", inputValue);
     inputRef.current.value = "";
@@ -207,6 +208,7 @@ const Home = () => {
     <>
       <ToastContainer />
 
+      {/* nav for small screen */}
       <div className="BlankBlueNav"></div>
 
       <div className="NavBar">
@@ -226,6 +228,7 @@ const Home = () => {
         <img src={Banner} alt="banner" />
       </div>
 
+      {/* search box and inputs */}
       <div className="search--div">
         <img src={searchicon} className="searchicon" alt="searchicon" />
         <form action="" onSubmit={SubmitForm}>

@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  sessionStorage.removeItem("directBuy");
+
   const Navigate = useNavigate();
   const [UserDetails, setUserdetails] = useState({
     name: "",

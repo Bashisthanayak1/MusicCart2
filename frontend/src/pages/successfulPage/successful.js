@@ -7,6 +7,7 @@ import "./successfull.css";
 import { Link } from "react-router-dom";
 
 const successful = () => {
+  sessionStorage.removeItem("directBuy");
   return (
     <div>
       <div className="successfulPAGE--logo--div">
@@ -25,7 +26,6 @@ const successful = () => {
         </Link>{" "}
       </div>
       <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
-
     </div>
   );
 };

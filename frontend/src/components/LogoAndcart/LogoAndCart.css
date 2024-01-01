@@ -1,11 +1,11 @@
 .logo--and--banner {
-  border: 1px solid blue;
+  border: 1px solid transparent;
   width: 90vw;
   height: auto;
   margin: auto;
 }
 .logo--div {
-  border: 1px solid red;
+  border: 1px solid transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,13 +18,13 @@
   width: 10px;
 }
 .logo--div > div:nth-child(1) {
-  border: 2px solid black;
+  border: 2px solid transparent;
   display: flex;
   align-items: center;
   font-size: 12px;
 }
 .viewcart {
-  border: 2px solid black;
+  border: 2px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;

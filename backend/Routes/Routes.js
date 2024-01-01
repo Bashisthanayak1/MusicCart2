@@ -5,6 +5,7 @@ import {
   addToCart,
   getUserDetails,
   updateQuantity,
+  emptyCart,
 } from "../controllers/userController.js";
 import isAuthenticated from "../middlewares/jwt.js";
 import {
@@ -39,5 +40,7 @@ router.get("/UserDetails/:_id", getUserDetails);
 // geting user by id and updating its cart item Quentity
 router.patch("/UpdateQuantity/:_id", updateQuantity);
 
+// removing all items in user cart
+router.patch("/emptyCart/:_id", emptyCart);
 
 export default router;

@@ -7,6 +7,7 @@ import ProductDetail from "../pages/ProductDetails/productDetail.js";
 import ViewCart from "../pages/Viewcart/viewCart.js";
 import CheckOut from "../pages/CheckOutPage/checkOut.js";
 import Successful from "../pages/successfulPage/successful.js";
+import SearchNav from "../components/Search In Navbar/searchNav.js";
 
 const pageRoute = () => {
   return (
@@ -19,6 +20,7 @@ const pageRoute = () => {
         <Route path="/viewCart" element={<ViewCart />} />
         <Route path="/checkOutPage" element={<CheckOut />} />
         <Route path="/successfulPage" element={<Successful />} />
+        <Route path="/SearchNav" element={<SearchNav />} />
       </Routes>
     </BrowserRouter>
   );

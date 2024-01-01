@@ -62,7 +62,7 @@
   margin-left: 0.5vw;
   font-size: 11px;
   display: flex;
-  margin-top:0px;
+  margin-top: 0px;
   align-items: center;
 }
 .LineView--Activate > div .blueColor {
@@ -82,7 +82,7 @@
 }
 .LineView--Activate .productDetails p {
   border: 1px dotted transparent;
-  margin-top: .5%;
+  margin-top: 0.5%;
   font-weight: 500;
 }
 .LineView--Activate .productName,
@@ -293,6 +293,10 @@
 }
 
 @media screen and (max-width: 551px) {
+  .BannerAndCart,
+  .NavBar {
+    display: none;
+  }
   .BlankBlueNav {
     display: block;
     border: 1px solid transparent;
@@ -300,10 +304,7 @@
     background-color: rgba(46, 0, 82, 1);
     height: 75px;
   }
-  .BannerAndCart,
-  .NavBar {
-    display: none;
-  }
+
   .banner {
     width: 97vw;
     padding: 5px 0px;
@@ -313,6 +314,7 @@
     transform: scale(1);
   }
 
+  /* search css for small screen */
   .search--div {
     position: absolute;
     top: 3vh;
@@ -333,6 +335,7 @@
     border-radius: 5px 0px 0px 5px;
     border-color: transparent;
   }
+
   .filtersANDSortings {
     width: 98vw;
     margin-top: 1vh;
@@ -414,7 +417,6 @@
   /* LineView--Activate css END============================>*/
 }
 @media screen and (max-width: 480px) {
-
   .Asingle--Product--div {
     border: 1px solid rgba(206, 206, 206, 1);
     padding: 0;

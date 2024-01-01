@@ -1,17 +1,16 @@
 import React from "react";
 import "./backToProduct.css";
-import { Link } from "react-router-dom";
-const backToProduct = () => {
+import { useNavigate } from "react-router-dom";
+
+const BackToProduct = () => {
+  const Navigate = useNavigate();
   return (
     <>
-      <button className="Back--to--products">
-        {" "}
-        <Link to="/home" className="Link">
-          Back to products
-        </Link>{" "}
+      <button className="Back--to--products" onClick={() => Navigate("/home")}>
+        Back to products
       </button>
     </>
   );
 };
 
-export default backToProduct;
+export default BackToProduct;

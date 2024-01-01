@@ -36,7 +36,7 @@ const NavWithoutLogin = (props) => {
           </span>
           <span>
             {props.Logout && (
-              <Link className="login--SignButton" to="/login" >
+              <Link className="login--SignButton" to="/login">
                 Logout
               </Link>
             )}

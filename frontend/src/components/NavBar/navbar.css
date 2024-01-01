@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 .homePage--Navbar {
-  border: 1px solid rgb(4, 10, 178);
+  border: 1px solid transparent;
   width: 100vw;
   height: auto;
 }
@@ -13,7 +13,7 @@ body {
 }
 .navInfo {
   border: 1px solid transparent;
-  width: 98%;
+  width: 95vw;
   height: 50px;
   display: flex;
   align-items: center;
@@ -24,7 +24,18 @@ body {
   margin-left: 1vw;
 }
 .login--SignButton {
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+@media screen and (max-width: 590px) {
+  .navInfo {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 490px) {
+  .navInfo {
+    font-size: 12px;
+  }
 }

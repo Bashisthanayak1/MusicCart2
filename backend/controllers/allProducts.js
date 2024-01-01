@@ -34,7 +34,7 @@ const addAllProduct = async (req, res) => {
 // getting all products / based on filters <============================================================>
 const filterProduct = async (req, res) => {
   try {
-    console.log("req.query", req.query);
+    // console.log("req.query", req.query);
 
     let filters = {};
     if (req.query.all) {
@@ -80,7 +80,7 @@ const filterProduct = async (req, res) => {
         }
       }
       // MongoDB query
-      console.log("filters;-", filters);
+      // console.log("filters;-", filters);
       const results = await AllProductModel.find(filters).sort(sortOption);
       res.status(200).json(results);
     } else {

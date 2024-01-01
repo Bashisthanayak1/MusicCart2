@@ -207,10 +207,10 @@ const updateQuantity = async (req, res) => {
     );
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found or cant update" });
     }
-    console.log("user:- ", user.mycart);
-    return res.json(user);
+    // console.log("user:- ", user.mycart);
+    return res.status(200).json(user);
   } catch (error) {
     console.log("updateQuantity error", error);
     return res
@@ -219,4 +219,33 @@ const updateQuantity = async (req, res) => {
   }
 };
 
-export { signupRoute, loginRoute, addToCart, getUserDetails, updateQuantity };
+// +++++++++++++++++++++++++++++++*********  geting user by id and updating/empty its cart   *********+++++++++++++++++++++++++++++++
+
+const emptyCart = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    console.log(_id);
+    const result = await UserModel.findByIdAndUpdate(
+      { _id },
+      { $set: { mycart: [] } }
+    );
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ message: "User not found or cant empty the cart" });
+    }
+    return res.status(200).json({ message: "cart is empty now" });
+  } catch (error) {
+    console.log("emptyCart error", error);
+    return res.status(400).json({ message: "Unable to emptyCart API" });
+  }
+};
+export {
+  signupRoute,
+  loginRoute,
+  addToCart,
+  getUserDetails,
+  updateQuantity,
+  emptyCart,
+};

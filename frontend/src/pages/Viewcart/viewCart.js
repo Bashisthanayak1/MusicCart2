@@ -6,10 +6,16 @@ import MyCartImage from "../../assets/images/MyCartIMAGE.png";
 import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import axios from "axios";
-import "./viewCart.css";
+import SearchNav from "../../components/Search In Navbar/searchNav.js";
+import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
 import { useNavigate } from "react-router-dom";
+import FooterMobile from "../../components/footerForMobile/footerMobile.js";
+
+import "./viewCart.css";
 
 const ViewCart = () => {
+  sessionStorage.removeItem("directBuy");
+
   const Navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -85,11 +91,30 @@ const ViewCart = () => {
   //============================================== FUNCTION END ===========================================
   return isLoggedIn ? (
     <>
-      <NavBar Logout={"Logout"} />
-      <BannerAndCart ViewCart={"/View Cart"} isLoggedIn={"true"} />
-      <BackToProductBUTTON />
+      <div className="viewcart--NavBar">
+        <NavBar Logout={"Logout"} />
+      </div>
+
+      <div className="viewCart--SearchNav">
+        <SearchNav />
+      </div>
+
+      <div className="viewcart--BannerAndCart">
+        <BannerAndCart ViewCart={"/View Cart"} isLoggedIn={"true"} />
+      </div>
+
+      <div className="viewcart--BackToProductBUTTON">
+        <BackToProductBUTTON />
+      </div>
+
+      {/*circle--arrow for smaller screen */}
+      <div className="circle--arrow--div">
+        {" "}
+        <CircleArrow />
+      </div>
+
       <div className="MyCartIMAGE--div">
-        <img src={MyCartImage} alt="" />
+        <img src={MyCartImage} alt="MyCartIMAGE" />
       </div>
 
       {Usercart.length > 0 && (
@@ -196,7 +221,80 @@ const ViewCart = () => {
           </button>
         </div>
       )}
+
+      {/* product details container for mobile START */}
+      <div className="productDetails--Container">
+        {Usercart.map((obj, i) => (
+          <div key={i}>
+            <div className="mobileSize--image">
+              <img src={obj.ProdectImage} alt="ProdectImage" />
+            </div>
+            <div className="mobileSize--Details">
+              <p className="mobileSize--ProductNameModel">
+                {" "}
+                {obj.ProductCompany} {obj.ProductModel}
+              </p>
+              <h5 className="mobileSize--ProductPrice">
+                ₹ {obj.Productprice * obj.quantity}
+              </h5>
+              <p className="mobileSize--ProductQuantity">
+                Quantity: {obj.quantity}{" "}
+              </p>
+              <p className="mobileSize--ProductColour">
+                Colour: {obj.ProductColor}{" "}
+              </p>
+              <p className="mobileSize--ProductStock">{obj.ProductAvailable}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="Total--InBrown--page">
+        <div>
+          <div>
+            <p>Convenience Fee:</p>
+            <p>₹ 45</p>
+          </div>
+          <div>
+            <p>Total: </p>
+            <h6>
+              ₹{" "}
+              {Usercart.map((item) => item.quantity * item.Productprice).reduce(
+                (sum, price) => sum + price,
+                0
+              ) + 45}
+            </h6>
+          </div>
+        </div>
+      </div>
+      <hr className="viewcart--hr" />
+      <span className="mobile--TotalAmount--span">
+        Total Amount ₹
+        <span className="mobile--TotalAmount">
+          {" "}
+          {Usercart.map((item) => item.quantity * item.Productprice).reduce(
+            (sum, price) => sum + price,
+            0
+          ) + 45}
+        </span>
+      </span>
+
+      {Usercart.length > 0 && (
+        <button
+          className="mobile--PLACEORDER"
+          onClick={() => Navigate("/checkOutPage")}
+        >
+          PLACE ORDER
+        </button>
+      )}
+
+      {/* product details container for mobile END */}
+
       <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
+
+      <div className="viewCart--FooterMobile">
+        {" "}
+        <FooterMobile isLoggedIn={isLoggedIn ? true : false} />
+      </div>
     </>
   ) : null;
 };
