@@ -7,10 +7,14 @@ import BackToProductBUTTON from "../../assets/baackToProducts  Button/backToProd
 import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import { ToastContainer, toast } from "react-toastify";
-
+import FooterMobile from "../../components/footerForMobile/footerMobile.js";
+import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
+import SearchNav from "../../components/Search In Navbar/searchNav.js";
 import "./productDetails.css";
 
 const ProductDetail = () => {
+  sessionStorage.removeItem("directBuy");
+
   const Navigate = useNavigate();
   //acessing the id we are getting from URL(from homepage product)
   const { _id } = useParams();
@@ -52,8 +56,6 @@ const ProductDetail = () => {
 
     test();
   }, [jwttoken]);
-
-  
 
   // clicked product details fetching ++++++++++++++++++++++++++++++++
 
@@ -110,22 +112,48 @@ const ProductDetail = () => {
       console.log("ClickAddToCart:- ", error);
     }
   }
+  // buy now onclick function +++++++++++++++++++++++++++++
+  function clickBuynow() {
+    sessionStorage.setItem("directBuy", _id);
+
+    Navigate(`/checkOutPage`);
+  }
 
   return (
     <>
       <ToastContainer />
 
-      <NavBar
-        Login={!isLoggedIn && "Login"}
-        Signup={!isLoggedIn && "Signup"}
-        Logout={isLoggedIn && "Logout"}
-      />
-      <BannerAndCart
-        ProductName={ProductDetails.Company}
-        ProductModel={ProductDetails.Model}
-        isLoggedIn={isLoggedIn ? "true" : "false"}
-      />
-      <BackToProductBUTTON />
+      <div className="productDetails--SearchNav">
+        <SearchNav />
+      </div>
+
+      <div className="productDetails--NavBar">
+        <NavBar
+          Login={!isLoggedIn && "Login"}
+          Signup={!isLoggedIn && "Signup"}
+          Logout={isLoggedIn && "Logout"}
+        />
+      </div>
+      <div className="productDetails--BannerAndCart">
+        <BannerAndCart
+          ProductName={ProductDetails.Company}
+          ProductModel={ProductDetails.Model}
+          isLoggedIn={isLoggedIn ? "true" : "false"}
+        />
+      </div>
+
+      {/*circle--arrow for smaller screen */}
+      <div className="circle--arrow--div">
+        {" "}
+        <CircleArrow />
+      </div>
+      {/* Buy now button for smaller screen */}
+      <div className="smaller--screen--BuyNow">Buy Now</div>
+
+      <div className="productDetails--BackToProductBUTTON">
+        <BackToProductBUTTON />
+      </div>
+
       <h4 className="Productheadline">{ProductDetails.Productheadline}</h4>
       <div className="PhotoANDdetails">
         <div className="productPhoto">
@@ -137,15 +165,15 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className="productdetails">
-          <h3>
+          <h3 className="item--Name--model">
             {ProductDetails.Company} {ProductDetails.Model}
           </h3>
           <div className="RatingsIcon--div">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
             <p> (50 Customer reviews)</p>
           </div>
 
@@ -153,7 +181,7 @@ const ProductDetail = () => {
           <p className="ProductColor--name">
             {ProductDetails.ProductColor} | {ProductDetails.Heaadphonetype}
           </p>
-          <p>About this item </p>
+          <p className="About--item--heading">About this item </p>
           <div className="Aboutitem">
             {ProductDetails.Aboutitem &&
               ProductDetails.Aboutitem.match(/-[^.]+\./g)
@@ -175,7 +203,7 @@ const ProductDetail = () => {
             {isLoggedIn ? (
               <>
                 <button onClick={ClickAddToCart}>Add cart</button>
-                <button>Buy Now</button>
+                <button onClick={clickBuynow}>Buy Now</button>
               </>
             ) : (
               <button onClick={() => Navigate("/login")}>Login</button>
@@ -183,7 +211,15 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
+      <img
+        src={footerWEB}
+        alt="footerWEB"
+        className="productDetails--footerWEB--IMAGE"
+      />
+      <div className="productDetails--FooterMobile">
+        {" "}
+        <FooterMobile isLoggedIn={isLoggedIn ? true : false} />
+      </div>
     </>
   );
 };
