@@ -241,6 +241,11 @@ const emptyCart = async (req, res) => {
     return res.status(400).json({ message: "Unable to emptyCart API" });
   }
 };
+
+const test = async (req, res) => {
+  res.send("test page");
+};
+
 export {
   signupRoute,
   loginRoute,
@@ -248,4 +253,5 @@ export {
   getUserDetails,
   updateQuantity,
   emptyCart,
+  test,
 };
