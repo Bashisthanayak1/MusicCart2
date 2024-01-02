@@ -422,7 +422,7 @@
     height: 78%;
   }
   .allProduct--container {
-    border: 2px solid red;
+    border: 2px solid transparent;
   }
 }
 @media screen and (max-width: 300px) {
