@@ -8,11 +8,14 @@ import ViewCart from "../pages/Viewcart/viewCart.js";
 import CheckOut from "../pages/CheckOutPage/checkOut.js";
 import Successful from "../pages/successfulPage/successful.js";
 import SearchNav from "../components/Search In Navbar/searchNav.js";
+import Test from "../pages/test/test.js";
 
 const pageRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Test />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
