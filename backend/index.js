@@ -16,6 +16,6 @@ app.use(
   })
 );
 app.use(router);
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 7000;
 
 app.listen(PORT, () => console.log(` app running on port ${PORT}!`));
