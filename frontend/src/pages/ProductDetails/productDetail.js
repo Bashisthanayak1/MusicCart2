@@ -4,12 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar/navbar";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
 import BackToProductBUTTON from "../../assets/baackToProducts  Button/backToProduct.js";
-import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import { ToastContainer, toast } from "react-toastify";
 import FooterMobile from "../../components/footerForMobile/footerMobile.js";
 import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
 import SearchNav from "../../components/Search In Navbar/searchNav.js";
+import FooterBigScreen from "../../components/footer For BigScreen/footerBigScreen.js";
 import "./productDetails.css";
 
 const ProductDetail = () => {
@@ -211,11 +211,12 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <img
-        src={footerWEB}
-        alt="footerWEB"
-        className="productDetails--footerWEB--IMAGE"
-      />
+
+      {/* big screen footer */}
+      <div className="productDetails--footerWEB--IMAGE">
+        <FooterBigScreen />
+      </div>
+
       <div className="productDetails--FooterMobile">
         {" "}
         <FooterMobile isLoggedIn={isLoggedIn ? true : false} />

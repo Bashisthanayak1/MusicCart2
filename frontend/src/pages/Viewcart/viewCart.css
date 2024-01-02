@@ -17,12 +17,13 @@
   border: 1px solid transparent;
   width: 93vw;
   height: 53vh;
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 4px;
   padding: 5px 0px;
+  margin: auto;
+  margin-bottom: 100px;
 }
 .products--full--detail--div {
   border: 2px dotted transparent;
@@ -150,11 +151,14 @@
   border: 1px solid transparent;
   width: 88vw;
   height: auto;
-  margin: auto;
+  margin: 2px auto 10px auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   /* margin-top: 20px; */
+  position: absolute;
+  bottom: 64px;
+  right: 5vw;
 }
 .Place--order > button {
   width: 19%;
@@ -167,15 +171,6 @@
 
 .products--full--detail--div > div {
   display: block;
-}
-/* viewCart--footerWEB--IMAGE */
-.viewCart--footerWEB--IMAGE {
-  /* border: 2px dotted red; */
-  height: auto;
-  width: 100%;
-  position: static;
-  bottom: 0;
-  margin-top: 5vh;
 }
 
 /* display none  */
@@ -332,7 +327,7 @@
   }
   .mobile--PLACEORDER {
     display: block;
-    margin: 13px auto;
+    margin: 13px auto 65px auto;
     width: 95vw;
     padding: 5px 0px;
     border-color: transparent;

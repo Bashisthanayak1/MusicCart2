@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/navbar";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
 import BackToProductBUTTON from "../../assets/baackToProducts  Button/backToProduct.js";
-import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,8 @@ import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
 import mobilenav from "../../assets/images/mobileLoginNav.png";
 import MusicLogoMobile from "../../assets/images/musicLogoMobile.png";
 import FooterMobile from "../../components/footerForMobile/footerMobile.js";
+import FooterBigScreen from "../../components/footer For BigScreen/footerBigScreen.js";
+
 import "./checkOut.css";
 
 const CheckOut = () => {
@@ -238,20 +239,17 @@ const CheckOut = () => {
           </div>
         </div>
       )}
-
-      <img
-        src={footerWEB}
-        alt="footerWEB"
-        className="checkOutPage--footerWEB--IMAGE"
-      />
+      {/* footer for bigscreen */}
+      <div className="checkOutPage--footerWEB--IMAGE">
+        <FooterBigScreen />
+      </div>
 
       {/* footer for mobile */}
 
       <div className="checkOut--FooterMobile">
-        {" "}
         <FooterMobile
           isLoggedIn={isLoggedIn ? true : false}
-          IsHomePageOpen={true}
+          IsHomePageOpen={false}
           IsCartPageOpen={false}
         />
       </div>

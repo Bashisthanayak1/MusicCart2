@@ -20,6 +20,7 @@
   justify-content: space-around;
   margin-top: 20px;
   padding: 5px;
+  margin-bottom: 130px;
 }
 .container > div {
   border: 1px solid transparent;
@@ -161,6 +162,8 @@
   gap: 15px;
   padding: 3px;
   border-radius: 5px;
+  position: absolute;
+  bottom: 70px;
 }
 .placeOrder--bottom button {
   width: 160px;
@@ -237,6 +240,11 @@
     color: #b52b00;
     margin: 0;
     font-size: 13px;
+  }
+  .placeOrder--bottom {
+    bottom: 52px;
+    font-size: 10px;
+    width: 90vw;
   }
 }
 /* for mobile */

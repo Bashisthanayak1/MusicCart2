@@ -1,5 +1,5 @@
 /* nav and banner section */
-.homePage--BlankBlueNav{
+.homePage--BlankBlueNav {
   display: none;
 }
 
@@ -191,8 +191,8 @@
   border: 1px solid transparent;
   width: 90vw;
   height: auto;
-  margin: 0px auto;
-  padding: 0px;
+  margin: 0px auto 60px auto;
+ 
 }
 .allProduct--container--Child {
   border: 2px dotted transparent;
@@ -260,14 +260,6 @@
   display: none;
 }
 
-.footerWEB--IMAGE {
-  border: 2px dotted transparent;
-  height: 50px;
-  width: 100%;
-  position: static;
-  bottom: 0;
-  margin-top: 10vh;
-}
 .Details {
   display: none;
 }
@@ -385,11 +377,11 @@
     padding: 0px;
   }
 
-  .footerWEB--IMAGE {
+  .home--footerWEB--IMAGE {
     display: none;
   }
   .FooterMobile {
-    display: block;
+    display: flex;
   }
 
   /* LineView--Activate css START============================*/
@@ -428,6 +420,9 @@
   .Asingle--Product--div > .blueColor > img {
     width: 80%;
     height: 78%;
+  }
+  .allProduct--container {
+    border: 2px solid red;
   }
 }
 @media screen and (max-width: 300px) {

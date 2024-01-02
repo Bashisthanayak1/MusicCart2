@@ -11,9 +11,9 @@ import GridBLACK from "../../assets/images/gridBLACK.png";
 import GridWHITE from "../../assets/images/gridWHITE.png";
 import LineWHITE from "../../assets/images//lineWHITE.png";
 import LineBLACK from "../../assets/images/lineBLACK.png";
-import footerWEB from "../../assets/images/footerWEB.png";
 import Banner from "../../assets/images/homePageBanner.png";
 import "./home.css";
+import FooterBigScreen from "../../components/footer For BigScreen/footerBigScreen.js";
 
 const Home = () => {
   sessionStorage.removeItem("directBuy");
@@ -230,7 +230,11 @@ const Home = () => {
 
       {/* search box and inputs */}
       <div className="homePage--search--div">
-        <img src={searchicon} className="homePage--searchicon" alt="searchicon" />
+        <img
+          src={searchicon}
+          className="homePage--searchicon"
+          alt="searchicon"
+        />
         <form action="" onSubmit={SubmitForm}>
           {" "}
           <input
@@ -393,11 +397,18 @@ const Home = () => {
         </div>
       </div>
 
-      <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
+      {/* big screen footer */}
+      <div className="home--footerWEB--IMAGE ">
+        <FooterBigScreen />
+      </div>
 
       <div className="FooterMobile">
         {" "}
-        <FooterMobile isLoggedIn={isLoggedIn ? true : false} IsHomePageOpen={true} IsCartPageOpen={false}/>
+        <FooterMobile
+          isLoggedIn={isLoggedIn ? true : false}
+          IsHomePageOpen={true}
+          IsCartPageOpen={false}
+        />
       </div>
     </>
   );

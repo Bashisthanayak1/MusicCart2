@@ -14,7 +14,7 @@
   border: 1px solid transparent;
   width: 90vw;
   height: auto;
-  margin: 20px auto;
+  margin: 20px auto 70px auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -50,7 +50,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 40%;
+  width: 49%;
   height: auto;
   /* transform: scale(0.8); */
   margin: 0;
@@ -105,7 +105,7 @@
   border-radius: 5px;
 }
 .PhotoANDdetails > div:nth-child(2) * {
-  margin: 2px;
+  margin: 0px;
 }
 .Button {
   padding: 5px 0px 0px 0px;
@@ -125,55 +125,46 @@
   background-color: rgb(255, 184, 0);
   margin-top: 6px;
 }
-.productDetails--footerWEB--IMAGE {
-  border: 2px dotted transparent;
-  height: 50px;
-  width: 100%;
-  position: static;
-  bottom: 0;
-  margin-top: 5vh;
-}
+
 /* Product details divs fort size adjustment */
 .item--Name--model {
   font-weight: 600;
 }
 .RatingsIcon--div {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
 }
 .price {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
 }
 .ProductColor--name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
 }
 .About--item--heading {
-  font-size: 13px;
+  font-size: 12px;
 }
 .Aboutitem {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
 }
 .Available > h4,
 .Brand > h4 {
-  font-size: 14px;
+  font-size: 13px;
 }
 .Available > p,
 .Brand > p {
-  font-size: 14px;
+  font-size: 13px;
 }
 .Button > button {
-  font-size: 14px;
+  font-size: 13px;
 }
-.productDetails--footerWEB--IMAGE{
-  height: auto;
-}
+
 @media screen and (max-width: 790px) {
   .PhotoANDdetails > div:nth-child(1) {
     border: 2px dotted transparent;
-    width: 55%;
+    width: 50%;
   }
   .productPhoto > img {
     width: 97%;

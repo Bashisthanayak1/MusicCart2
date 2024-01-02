@@ -3,13 +3,14 @@ import NavBar from "../../components/NavBar/navbar";
 import BannerAndCart from "../../components/LogoAndcart/LogoAndCart.js";
 import BackToProductBUTTON from "../../assets/baackToProducts  Button/backToProduct.js";
 import MyCartImage from "../../assets/images/MyCartIMAGE.png";
-import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import axios from "axios";
 import SearchNav from "../../components/Search In Navbar/searchNav.js";
 import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
 import { useNavigate } from "react-router-dom";
 import FooterMobile from "../../components/footerForMobile/footerMobile.js";
+import FooterBigScreen from "../../components/footer For BigScreen/footerBigScreen.js";
+
 import "./viewCart.css";
 
 const ViewCart = () => {
@@ -90,8 +91,6 @@ const ViewCart = () => {
   //============================================== FUNCTION END ===========================================
   return isLoggedIn ? (
     <>
-   
-
       <div className="viewcart--NavBar">
         <NavBar Logout={"Logout"} />
       </div>
@@ -288,16 +287,12 @@ const ViewCart = () => {
         </button>
       )}
 
-      {/* product details container for mobile END */}
-
-      <img
-        src={footerWEB}
-        alt="footerWEB"
-        className="viewCart--footerWEB--IMAGE"
-      />
+      {/*footer for BigScreen */}
+      <div className="viewCart--footerWEB--IMAGE">
+        <FooterBigScreen />
+      </div>
 
       <div className="viewCart--FooterMobile">
-        {" "}
         <FooterMobile
           isLoggedIn={isLoggedIn ? true : false}
           IsCartPageOpen={true}
