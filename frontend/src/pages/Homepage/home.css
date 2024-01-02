@@ -1,5 +1,5 @@
 /* nav and banner section */
-.BlankBlueNav {
+.homePage--BlankBlueNav{
   display: none;
 }
 
@@ -15,8 +15,8 @@
   transform: scaleX(1) scaleY(0.8);
 }
 
-/* search section */
-.search--div {
+/* search section   SEARCH SEARCH SEARCH SEARCH SEARCH*/
+.homePage--search--div {
   border: 1px solid transparent;
   width: 90vw;
   height: auto;
@@ -26,8 +26,8 @@
   justify-content: flex-start;
   height: 40px;
 }
-.search--div input,
-.search--div form {
+.homePage--search--div input,
+.homePage--search--div form {
   border: 1px solid rgba(200, 200, 200, 1);
   border-left: transparent;
   height: 100%;
@@ -35,7 +35,7 @@
   border-radius: 0px 15px 15px 0px;
   outline: none;
 }
-.searchicon {
+.homePage--searchicon {
   border: 1.5px solid rgba(200, 200, 200, 1);
   width: 28px;
   height: 24px;
@@ -294,10 +294,10 @@
 
 @media screen and (max-width: 551px) {
   .BannerAndCart,
-  .NavBar {
+  .home--Page--NavBar {
     display: none;
   }
-  .BlankBlueNav {
+  .homePage--BlankBlueNav {
     display: block;
     border: 1px solid transparent;
     width: 100vw;
@@ -314,21 +314,21 @@
     transform: scale(1);
   }
 
-  /* search css for small screen */
-  .search--div {
+  /* search css for small screen ******** */
+  .homePage--search--div {
     position: absolute;
     top: 3vh;
     margin-left: 5%;
     background-color: white;
     border-radius: 4px;
   }
-  .search--div input,
-  .search--div form {
+  .homePage--search--div input,
+  .homePage--search--div form {
     height: 100%;
     width: 100%;
     border-color: transparent;
   }
-  .searchicon {
+  .homePage--searchicon {
     width: 28px;
     height: 24px;
     padding: 7.3px;

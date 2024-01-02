@@ -209,9 +209,9 @@ const Home = () => {
       <ToastContainer />
 
       {/* nav for small screen */}
-      <div className="BlankBlueNav"></div>
+      <div className="homePage--BlankBlueNav"></div>
 
-      <div className="NavBar">
+      <div className="home--Page--NavBar">
         {" "}
         <NavBar
           Login={!isLoggedIn && "Login"}
@@ -229,8 +229,8 @@ const Home = () => {
       </div>
 
       {/* search box and inputs */}
-      <div className="search--div">
-        <img src={searchicon} className="searchicon" alt="searchicon" />
+      <div className="homePage--search--div">
+        <img src={searchicon} className="homePage--searchicon" alt="searchicon" />
         <form action="" onSubmit={SubmitForm}>
           {" "}
           <input
@@ -397,7 +397,7 @@ const Home = () => {
 
       <div className="FooterMobile">
         {" "}
-        <FooterMobile isLoggedIn={isLoggedIn ? true : false} />
+        <FooterMobile isLoggedIn={isLoggedIn ? true : false} IsHomePageOpen={true} IsCartPageOpen={false}/>
       </div>
     </>
   );

@@ -6,6 +6,10 @@ import footerWEB from "../../assets/images/footerWEB.png";
 import serverUrl from "../../config.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
+import mobilenav from "../../assets/images/mobileLoginNav.png";
+import MusicLogoMobile from "../../assets/images/musicLogoMobile.png";
+import FooterMobile from "../../components/footerForMobile/footerMobile.js";
 import "./checkOut.css";
 
 const CheckOut = () => {
@@ -98,12 +102,32 @@ const CheckOut = () => {
 
   return isLoggedIn ? (
     <>
-      <NavBar Logout={"Logout"} />
-      <BannerAndCart Checkout={"/ Checkout"} />
-      <BackToProductBUTTON />
-      <center>
-        <u className="Checkout--heading">Checkout</u>{" "}
-      </center>
+      <div className="checkOut--mobileNav">
+        {/* blank purple nav and logo for small screen */}
+        <img src={mobilenav} alt="mobilenav" className="login--mobilenav" />
+
+        {/* logo   */}
+        <img
+          src={MusicLogoMobile}
+          alt="MusicLogoMobile"
+          className="login--music--Logo--ForMobile"
+          onClick={() => Navigate("/home")}
+        />
+      </div>
+
+      <div className="checkout--NavBar--BannerAndCart--BackToProductBUTTON">
+        <NavBar Logout={"Logout"} />
+        <BannerAndCart Checkout={"/ Checkout"} />
+        <BackToProductBUTTON />
+      </div>
+      {/*circle--arrow for smaller screen */}
+      <div className="circle--arrow--div">
+        {" "}
+        <CircleArrow />
+      </div>
+      <div className="Checkout--heading">
+        <u>Checkout</u>{" "}
+      </div>
       {direct_buy_id || Usercart.length > 0 ? (
         <div className="container">
           <div className="product--Side">
@@ -152,10 +176,13 @@ const CheckOut = () => {
           </div>
           <div className="Placeorder--Side">
             <button onClick={placeOrder}>Place your order</button>
-            <p>
+            <p className="conditions">
               By placing your order, you agree to Musicart privacy notice and
               conditions of use.
             </p>
+
+            <hr className="division--line" />
+
             <h4>Order Summary</h4>
             <div className="item--and--delivery">
               <div>
@@ -173,6 +200,8 @@ const CheckOut = () => {
                 <p>₹45.00</p>
               </div>
             </div>
+            <hr className="division--line" />
+
             <div className="Order--Total--div">
               <h4>Order Total:</h4>
               <h4>
@@ -196,7 +225,7 @@ const CheckOut = () => {
           </div>
           <div>
             <h5>
-              Order Total : ₹
+              <span className="OrderTotal--span">Order Total :</span>₹
               {Usercart.map(
                 (item) =>
                   (direct_buy_id ? 1 : item.quantity) * item.Productprice
@@ -210,7 +239,22 @@ const CheckOut = () => {
         </div>
       )}
 
-      <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
+      <img
+        src={footerWEB}
+        alt="footerWEB"
+        className="checkOutPage--footerWEB--IMAGE"
+      />
+
+      {/* footer for mobile */}
+
+      <div className="checkOut--FooterMobile">
+        {" "}
+        <FooterMobile
+          isLoggedIn={isLoggedIn ? true : false}
+          IsHomePageOpen={true}
+          IsCartPageOpen={false}
+        />
+      </div>
     </>
   ) : null;
 };

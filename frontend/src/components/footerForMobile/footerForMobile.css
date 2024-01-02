@@ -1,6 +1,6 @@
 .footer--forMobile {
   display: block;
-  border: 1px solid;
+  border: 1px solid transparent;
   border-color: rgba(200, 200, 200, 1) transparent transparent transparent;
   width: 100vw;
   height: auto;
@@ -9,19 +9,21 @@
   justify-content: space-between;
 }
 .footer--forMobile > div {
-  border-top: 6px solid transparent;
+  border-top: 3px solid transparent;
   text-align: center;
-  padding: 3px;
-  border-radius: 4px;
+  padding: 0px;
+  border-radius: 2px;
+}
+.footer--forMobile > div > img {
+ height: 15px;
 }
 .footer--forMobile > div.selected {
-  border-color: rgba(46, 0, 82, 1) transparent transparent;
+  border-color: rgba(46, 0, 82, 1);
 }
 .footer--forMobile > div > p {
   margin: 0;
   font-weight: 500;
 }
 .footer--forMobile > div:last-child > span {
-  font-size: 18px;
   font-weight: bolder;
 }

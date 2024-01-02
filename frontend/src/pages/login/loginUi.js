@@ -76,13 +76,19 @@ const Login = () => {
   return (
     <div>
       <ToastContainer />
+
+      {/* blank purple nav for small screen */}
       <img src={mobilenav} alt="mobilenav" className="login--mobilenav" />
+
+      {/* logo for small screen  */}
       <img
         src={MusicLogoMobile}
         alt="MusicLogoMobile"
         className="login--music--Logo--ForMobile"
         onClick={() => Navigate("/home")}
       />
+
+      {/* logo for larger screen */}
       <center className="loginPage--centerTag">
         <img
           src={MusicLogo}

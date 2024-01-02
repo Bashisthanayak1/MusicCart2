@@ -10,7 +10,6 @@ import SearchNav from "../../components/Search In Navbar/searchNav.js";
 import CircleArrow from "../../assets/circle BackArrow/circleArrow.js";
 import { useNavigate } from "react-router-dom";
 import FooterMobile from "../../components/footerForMobile/footerMobile.js";
-
 import "./viewCart.css";
 
 const ViewCart = () => {
@@ -91,6 +90,8 @@ const ViewCart = () => {
   //============================================== FUNCTION END ===========================================
   return isLoggedIn ? (
     <>
+   
+
       <div className="viewcart--NavBar">
         <NavBar Logout={"Logout"} />
       </div>
@@ -289,11 +290,19 @@ const ViewCart = () => {
 
       {/* product details container for mobile END */}
 
-      <img src={footerWEB} alt="footerWEB" className="footerWEB--IMAGE" />
+      <img
+        src={footerWEB}
+        alt="footerWEB"
+        className="viewCart--footerWEB--IMAGE"
+      />
 
       <div className="viewCart--FooterMobile">
         {" "}
-        <FooterMobile isLoggedIn={isLoggedIn ? true : false} />
+        <FooterMobile
+          isLoggedIn={isLoggedIn ? true : false}
+          IsCartPageOpen={true}
+          IsHomePageOpen={false}
+        />
       </div>
     </>
   ) : null;
