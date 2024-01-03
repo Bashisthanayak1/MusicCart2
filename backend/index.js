@@ -10,7 +10,7 @@ app.use(express.json({ limit: "50mb" }));
 //to get details from frontend
 app.use(
   cors({
-    origin: ["*", "http://localhost:3000","https://music-cart-frontend-tmog.onrender.com"],
+    origin: ["*"],
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     credentials: true,
   })

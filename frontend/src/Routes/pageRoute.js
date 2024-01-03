@@ -15,7 +15,6 @@ const pageRoute = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Test />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
