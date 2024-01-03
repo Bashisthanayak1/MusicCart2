@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:7000https://fakemusic-repo-backend.onrender.com"
+const serverUrl ="http://localhost:7000"
 // "https://music-cart-backend-xd18.onrender.com";
 // "http://localhost:7000"
 
