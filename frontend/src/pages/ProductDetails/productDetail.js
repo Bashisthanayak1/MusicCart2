@@ -20,9 +20,7 @@ const ProductDetail = () => {
   const { _id } = useParams();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [ProductDetails, setProductDetails] = useState({
-    productDetails: "",
-  });
+  const [ProductDetails, setProductDetails] = useState(null);
   const [user_id, setUser_id] = useState(null);
 
   // checking if user logged or not  ++++++++++++++++++++++++++++++++
@@ -136,8 +134,8 @@ const ProductDetail = () => {
       </div>
       <div className="productDetails--BannerAndCart">
         <BannerAndCart
-          ProductName={ProductDetails.Company}
-          ProductModel={ProductDetails.Model}
+          ProductName={ProductDetails && ProductDetails.Company}
+          ProductModel={ProductDetails && ProductDetails.Model}
           isLoggedIn={isLoggedIn ? "true" : "false"}
         />
       </div>
@@ -154,63 +152,75 @@ const ProductDetail = () => {
         <BackToProductBUTTON />
       </div>
 
-      <h4 className="Productheadline">{ProductDetails.Productheadline}</h4>
-      <div className="PhotoANDdetails">
-        <div className="productPhoto">
-          <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
-          <div className="ThreeIMG">
-            <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
-            <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
-            <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
+      {/* Product info */}
+      {ProductDetails ? (
+        <div>
+          <h4 className="Productheadline">{ProductDetails.Productheadline}</h4>
+          <div className="PhotoANDdetails">
+            <div className="productPhoto">
+              <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
+              <div className="ThreeIMG">
+                <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
+                <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
+                <img src={ProductDetails.ProdectImage} alt="ProdectImage" />
+              </div>
+            </div>
+            <div className="productdetails">
+              <h3 className="item--Name--model">
+                {ProductDetails.Company} {ProductDetails.Model}
+              </h3>
+              <div className="RatingsIcon--div">
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <p> (50 Customer reviews)</p>
+              </div>
+
+              <h3 className="price">Price - ₹ {ProductDetails.Productprice}</h3>
+              <p className="ProductColor--name">
+                {ProductDetails.ProductColor} | {ProductDetails.Heaadphonetype}
+              </p>
+              <p className="About--item--heading">About this item </p>
+              <div className="Aboutitem">
+                {ProductDetails.Aboutitem &&
+                  ProductDetails.Aboutitem.match(/-[^.]+\./g)
+                    .map((sentence) => ({
+                      feature: sentence.trim(),
+                    }))
+                    .map((obj, i) => <li>{obj.feature}</li>)}
+              </div>
+              <div className="Available">
+                <h4>Available - </h4>
+                <p> {ProductDetails.Available}</p>
+              </div>
+              <div className="Brand">
+                <h4>Brand - </h4>
+                <p> {ProductDetails.Company}</p>
+              </div>
+
+              <div className="Button">
+                {isLoggedIn ? (
+                  <>
+                    <button onClick={ClickAddToCart}>Add cart</button>
+                    <button onClick={clickBuynow}>Buy Now</button>
+                  </>
+                ) : (
+                  <button onClick={() => Navigate("/login")}>Login</button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="productdetails">
-          <h3 className="item--Name--model">
-            {ProductDetails.Company} {ProductDetails.Model}
-          </h3>
-          <div className="RatingsIcon--div">
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <p> (50 Customer reviews)</p>
-          </div>
-
-          <h3 className="price">Price - ₹ {ProductDetails.Productprice}</h3>
-          <p className="ProductColor--name">
-            {ProductDetails.ProductColor} | {ProductDetails.Heaadphonetype}
-          </p>
-          <p className="About--item--heading">About this item </p>
-          <div className="Aboutitem">
-            {ProductDetails.Aboutitem &&
-              ProductDetails.Aboutitem.match(/-[^.]+\./g)
-                .map((sentence) => ({
-                  feature: sentence.trim(),
-                }))
-                .map((obj, i) => <li>{obj.feature}</li>)}
-          </div>
-          <div className="Available">
-            <h4>Available - </h4>
-            <p> {ProductDetails.Available}</p>
-          </div>
-          <div className="Brand">
-            <h4>Brand - </h4>
-            <p> {ProductDetails.Company}</p>
-          </div>
-
-          <div className="Button">
-            {isLoggedIn ? (
-              <>
-                <button onClick={ClickAddToCart}>Add cart</button>
-                <button onClick={clickBuynow}>Buy Now</button>
-              </>
-            ) : (
-              <button onClick={() => Navigate("/login")}>Login</button>
-            )}
-          </div>
-        </div>
-      </div>
+      ) : (
+        <center className="loadingImg">
+          <img
+            src="https://i.pinimg.com/originals/3d/6a/a9/3d6aa9082f3c9e285df9970dc7b762ac.gif"
+            alt=""
+          />{" "}
+        </center>
+      )}
 
       {/* big screen footer */}
       <div className="productDetails--footerWEB--IMAGE">
