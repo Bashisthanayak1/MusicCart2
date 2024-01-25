@@ -350,52 +350,59 @@ const Home = () => {
       </div>
       {/*filtersANDSortings div End  */}
 
-      <div className="allProduct--container">
-        <div
-          className={
-            gridBLACK || screenWidth <= 480
-              ? "allProduct--container--Child"
-              : "LineView--Activate"
-          }
-        >
-          {AllData.map((obj, i) => (
-            <>
-              <div
-                className="Asingle--Product--div"
-                key={obj._id}
-                storekey={obj._id}
-                onClick={() => clickAproduct(obj._id)}
-              >
-                <div className="blueColor" key={obj._id}>
-                  <img src={obj.ProdectImage} alt="productImg" />
+      {AllData && AllData.length > 0 ? (
+        <div className="allProduct--container">
+          <div
+            className={
+              gridBLACK || screenWidth <= 480
+                ? "allProduct--container--Child"
+                : "LineView--Activate"
+            }
+          >
+            {AllData &&
+              AllData.map((obj, i) => (
+                <>
                   <div
-                    className="cartDIV"
-                    style={{ display: !isLoggedIn && "none" }}
-                    onClick={(event) => ClickAddToCart(event, obj)}
+                    className="Asingle--Product--div"
+                    key={obj._id}
+                    storekey={obj._id}
+                    onClick={() => clickAproduct(obj._id)}
                   >
-                    <i className="fa-solid fa-cart-plus"></i>
+                    <div className="blueColor" key={obj._id}>
+                      <img src={obj.ProdectImage} alt="productImg" />
+                      <div
+                        className="cartDIV"
+                        style={{ display: !isLoggedIn && "none" }}
+                        onClick={(event) => ClickAddToCart(event, obj)}
+                      >
+                        <i className="fa-solid fa-cart-plus"></i>
+                      </div>
+                    </div>
+                    <div className="productDetails" key={i}>
+                      <p className="productName--model">
+                        <span className="productName">{obj.Company}</span>
+                        <span className="model"> {obj.Model} </span>
+                      </p>
+                      <p className="price">
+                        Price- ₹<span> {obj.Productprice}</span>
+                      </p>
+                      <p className="color--and--type">
+                        <span className="color">{obj.ProductColor} </span>
+                        <span className="color">| {obj.Heaadphonetype}</span>
+                      </p>
+                      <p className="HeadLine">{obj.Productheadline}</p>
+                      <button className="Details">Details</button>
+                    </div>
                   </div>
-                </div>
-                <div className="productDetails" key={i}>
-                  <p className="productName--model">
-                    <span className="productName">{obj.Company}</span>
-                    <span className="model"> {obj.Model} </span>
-                  </p>
-                  <p className="price">
-                    Price- ₹<span> {obj.Productprice}</span>
-                  </p>
-                  <p className="color--and--type">
-                    <span className="color">{obj.ProductColor} </span>
-                    <span className="color">| {obj.Heaadphonetype}</span>
-                  </p>
-                  <p className="HeadLine">{obj.Productheadline}</p>
-                  <button className="Details">Details</button>
-                </div>
-              </div>
-            </>
-          ))}
+                </>
+              ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <center className="loadingImg">
+          <img src="https://www.pcb.com/contentstore/images/pcb_corporate/supportingimages/loader.gif" alt="" />{" "}
+        </center>
+      )}
 
       {/* big screen footer */}
       <div className="home--footerWEB--IMAGE ">
