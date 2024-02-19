@@ -325,7 +325,6 @@ const Home = () => {
       {AllData.length > 0  ? (
         <div
           className="allProduct--container"
-          style={{ border: "2px solid red" }}
         >
           <div
             className={
@@ -333,7 +332,6 @@ const Home = () => {
                 ? "allProduct--container--Child"
                 : "LineView--Activate"
             }
-            style={{ border: "2px solid blue" }}
           >
             {AllData.map((obj, i) => (
               <>
@@ -342,7 +340,6 @@ const Home = () => {
                   key={obj._id}
                   storekey={obj._id}
                   onClick={() => clickAproduct(obj._id)}
-                  style={{ border: "2px solid green" }}
                 >
                   <div className="blueColor" key={obj._id}>
                     <img src={obj.ProdectImage} alt="productImg" />
