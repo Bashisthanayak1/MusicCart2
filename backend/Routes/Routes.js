@@ -10,7 +10,6 @@ import {
 } from "../controllers/userController.js";
 import isAuthenticated from "../middlewares/jwt.js";
 import {
-  addAllProduct,
   filterProduct,
   productById,
 } from "../controllers/allProducts.js";
@@ -23,8 +22,7 @@ router.post("/login", loginRoute);
 
 router.post("/signup", signupRoute);
 
-// all product posing data route
-router.post("/allproduct", addAllProduct);
+
 
 // to get all products data
 router.get("/getProduct", filterProduct);
