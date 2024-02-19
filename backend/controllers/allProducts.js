@@ -1,100 +1,74 @@
 import AllProductModel from "../model/allProducts.js";
 import "../db connection/mongoo.js";
 
-// Posting all products/data ========================================================================>
-const addAllProduct = async (req, res) => {
-  try {
-    const arr = req.body;
-    // console.log(arr);
-    arr.map(async (obj, index) => {
-      await AllProductModel.create({
-        ProdectImage: obj.ProdectImage,
-        Company: obj.Company,
-        Model: obj.Model,
-        Productprice: obj.Productprice,
-        ProductColor: obj.ProductColor,
-        Heaadphonetype: obj.Heaadphonetype,
-        Productheadline: obj.Productheadline,
-        Aboutitem: obj.Aboutitem,
-        ratings: obj.ratings,
-        Available: obj.Available,
-      });
-    });
-    res.status(200).send({
-      message: "all products data has been added",
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(400).send({
-      message: "all products data has not been added",
-    });
-  }
-};
+// getting all products --> based on search/filters <==============================================================================>
 
-// getting all products / based on filters <============================================================>
 const filterProduct = async (req, res) => {
   try {
-    // console.log("req.query", req.query);
+    const { Select_Headphone_Type, Company, Colour, Price, Sort_by } =
+      req.query.filteredData;
 
-    let filters = {};
-    if (req.query.all) {
-      // Handle filtering
-      if (req.query.all.Select_Headphone_Type) {
-        filters.Heaadphonetype = {
-          $regex: new RegExp(req.query.all.Select_Headphone_Type, "i"),
-        };
-      }
+    console.log("A query:- ", Company);
 
-      if (req.query.all.Company) {
-        filters.Company = { $regex: new RegExp(req.query.all.Company, "i") };
-      }
+    // query +++++++++++
+    let queries = [];
 
-      if (req.query.all.Colour) {
-        filters.ProductColor = {
-          $regex: new RegExp(req.query.all.Colour, "i"),
-        };
-      }
-
-      if (req.query.all.Price) {
-        const priceRange = req.query.all.Price.split("-");
-        filters.Productprice = {
-          $gte: parseFloat(priceRange[0]),
-          $lte: parseFloat(priceRange[1]),
-        };
-      }
-
-      // Handle sorting
-      let sortOption = {};
-      if (
-        req.query.all.Sort_by &&
-        req.query.all.Sort_by !== "Sort_by_Feature"
-      ) {
-        if (req.query.all.Sort_by === "Highest") {
-          sortOption["Productprice"] = -1; // Sort by price in descending order
-        } else if (req.query.all.Sort_by === "Lowest") {
-          sortOption["Productprice"] = 1; // Sort by price in ascending order
-        } else if (req.query.all.Sort_by === "A-Z") {
-          sortOption["Model"] = 1; // Sort alphabetically by Model in ascending order
-        } else if (req.query.all.Sort_by === "Z-A") {
-          sortOption["Model"] = -1; // Sort alphabetically by Model in descending order
-        }
-      }
-      // MongoDB query
-      // console.log("filters;-", filters);
-      const results = await AllProductModel.find(filters).sort(sortOption);
-      res.status(200).json(results);
-    } else {
-      const results = await AllProductModel.find();
-      res.status(200).json(results);
+    if (Select_Headphone_Type != "") {
+      queries.push({ Heaadphonetype: Select_Headphone_Type });
     }
+    if (Company != "") {
+      queries.push({
+        Company: { $regex: Company, $options: "i" },
+      });
+    }
+    if (Colour != "") {
+      queries.push({ ProductColor: { $regex: Colour, $options: "i" } });
+    }
+    if (Price != "") {
+      let priceArr = Price.split("-");
+      const minPrice = parseInt(priceArr[0]);
+      const maxPrice = parseInt(priceArr[1]);
+
+      queries.push({ Productprice: { $gte: minPrice, $lte: maxPrice } });
+    }
+
+    let qry =
+      Select_Headphone_Type == "" &&
+      Company == "" &&
+      Colour == "" &&
+      Price == ""
+        ? {}
+        : { $and: queries };
+
+    // sorting ++++++++++++++++
+    let sorting = {};
+
+    if (Sort_by == "Lowest" || Sort_by == "Highest") {
+      Sort_by == "Lowest"
+        ? (sorting.Productprice = 1)
+        : (sorting.Productprice = -1);
+    } else if (Sort_by == "A-Z" || Sort_by == "Z-A") {
+      Sort_by == "A-Z" ? (sorting.Company = 1) : (sorting.Company = -1);
+    }
+
+    // console.log("queries arr:- ", queries);
+    // console.log("sorting:- ", sorting);
+
+    const filteredProduct = await AllProductModel.find(qry).sort(sorting);
+
+    // console.log("filteredProduct:- ", filteredProduct);
+
+    filteredProduct.length > 0
+      ? res.status(200).json(filteredProduct)
+      : res.status(200).json({ message: "No data found" });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-// geting product by id =============================================================>
-
+// geting product by id ===============================================================================>
 const productById = async (req, res) => {
   try {
     const { _id } = req.params;
@@ -114,5 +88,4 @@ const productById = async (req, res) => {
   }
 };
 
-
-export { addAllProduct, filterProduct, productById };
+export { filterProduct, productById };
