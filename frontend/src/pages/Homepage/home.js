@@ -12,8 +12,8 @@ import GridWHITE from "../../assets/images/gridWHITE.png";
 import LineWHITE from "../../assets/images//lineWHITE.png";
 import LineBLACK from "../../assets/images/lineBLACK.png";
 import Banner from "../../assets/images/homePageBanner.png";
-import "./home.css";
 import FooterBigScreen from "../../components/footer For BigScreen/footerBigScreen.js";
+import "./home.css";
 
 const Home = () => {
   sessionStorage.removeItem("directBuy");
@@ -25,6 +25,8 @@ const Home = () => {
   const [lineWHITE, setLineImage] = useState(true);
   const [AllData, setAllData] = useState([]);
   const [user_id, setUser_id] = useState(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
   const [filteredData, setFilteredData] = useState({
     Select_Headphone_Type: "",
     Company: "",
@@ -32,7 +34,6 @@ const Home = () => {
     Price: "",
     Sort_by: "",
   });
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,7 +47,7 @@ const Home = () => {
     };
   }, []);
 
-  // checking if user logged or not  ++++++++++++++++++++++++++++++++ //
+  // checking if user logged or not  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
   const jwttoken = sessionStorage.getItem("jwttoken");
   useEffect(() => {
     async function test() {
@@ -77,8 +78,8 @@ const Home = () => {
     test();
   }, [jwttoken]);
 
-  // Create a ref for the input element ++++++++++++++++++++++++++++++++
-  const inputRef = useRef();
+
+
 
   // +++++++++++++++++++++++++++++++++++++++++++++++++
   function clickGrid() {
@@ -92,45 +93,41 @@ const Home = () => {
     setGridImage((pre) => !pre);
   }
 
-  // get all product data  +++++++++++++++++++++++++++++++++++++
 
-  useEffect(() => {
-    // Fetch all product data when the component mounts
-    const fetchData = async () => {
-      try {
-        const result = await axios.get(`${serverUrl}/getProduct`);
-        setAllData(result.data);
-        // console.log("Getdata-", result.data);
-      } catch (error) {
-        console.log("Getdata error:- ", error);
-      }
-    };
+    // Create a ref for the input element +++++++++++++++++++++++
+    const inputRef = useRef();
 
-    fetchData();
-  }, []);
-
-  // Function to fetch data based on search input+++++++++++++++++++++++++++++
-  const getData = async (input) => {
-    try {
-      const result = await axios.get(`${serverUrl}/getProduct`, {
-        params: { all: input },
-      });
-      setAllData(result.data);
-      // console.log("getData-", result.data);
-    } catch (error) {
-      console.log("getData error:- ", error);
-    }
-  };
-
-  // Function triggers when the form is submitted+++++++++++++++++++++++++++++
-  const SubmitForm = (event) => {
+  // Function for Search +++++++++++++++++++++++++++++
+  const SearchPlaced = (event) => {
     event.preventDefault();
     let inputValue = inputRef.current.value;
     // calling getData function
-    getData({ Company: inputValue });
-    console.log("SubmitForm", inputValue);
+    setFilteredData((prev) => {
+      return { ...prev, Company: inputValue };
+    });
+    console.log("SearchPlaced", inputValue);
     inputRef.current.value = "";
   };
+
+
+
+  // Function to fetch data based on search/page-load.. +++++++++++++++++++++++++++++
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await axios.get(`${serverUrl}/getProduct`, {
+          params: { filteredData },
+        });
+        setAllData(result.data);
+        console.log("getData-", result);
+      } catch (error) {
+        console.log("getData error:- ", error);
+      }
+    };
+    getData();
+  }, [filteredData]);
+
+
 
   // Function triggers when filters are selected+++++++++++++++++++++++++++++
   const SelectFilters = async (event) => {
@@ -140,21 +137,8 @@ const Home = () => {
     setFilteredData((prev) => {
       return { ...prev, [name]: value };
     });
+    console.log(value);
   };
-
-  // Log the filteredData when it changes +++++++++++++++++++++++++++++
-  useEffect(() => {
-    if (
-      filteredData.Select_Headphone_Type !== "" ||
-      filteredData.Company !== "" ||
-      filteredData.Colour !== "" ||
-      filteredData.Price !== "" ||
-      filteredData.Sort_by !== ""
-    ) {
-      // console.log("filteredData:- ", filteredData);
-      getData(filteredData);
-    }
-  }, [filteredData]);
 
   // function triggers when we click on a product ++++++++++++++++++++++++++++++++++++++++++++++++
   function clickAproduct(_id) {
@@ -235,7 +219,7 @@ const Home = () => {
           className="homePage--searchicon"
           alt="searchicon"
         />
-        <form action="" onSubmit={SubmitForm}>
+        <form action="" onSubmit={SearchPlaced}>
           {" "}
           <input
             type="search"
@@ -267,10 +251,7 @@ const Home = () => {
               value={filteredData.Select_Headphone_Type}
               onChange={SelectFilters}
             >
-              <option value="featured" disabled>
-                Featured
-              </option>
-              <option selected>Select Headphone Type</option>
+              <option value="">Select Headphone Type</option>
               <option value="In-ear headphone">In-ear headphone</option>
               <option value="On-ear headphone">On-ear headphone</option>
               <option value="Over-ear headphone">Over-ear headphone</option>
@@ -281,9 +262,6 @@ const Home = () => {
               value={filteredData.Company}
               onChange={SelectFilters}
             >
-              <option value="featured" disabled>
-                Featured
-              </option>
               <option value="">Company</option>
               <option value="JBL">JBL</option>
               <option value="Sony">Sony</option>
@@ -298,10 +276,7 @@ const Home = () => {
               value={filteredData.Colour}
               onChange={SelectFilters}
             >
-              <option value="featured" disabled>
-                Featured
-              </option>
-              <option selected>Colour</option>
+              <option value="">Colour</option>
               <option value="Blue">Blue</option>
               <option value="Black">Black</option>
               <option value="White">White</option>
@@ -313,26 +288,21 @@ const Home = () => {
               value={filteredData.Price}
               onChange={SelectFilters}
             >
-              <option value="featured" disabled>
-                Featured
-              </option>
-              <option selected>Price</option>
+              <option value="">Price</option>
               <option value="0-1000">₹0 - ₹1,000</option>
               <option value="1000-10000">₹1,000 - ₹10,000</option>
               <option value="10000-20000">₹10,000 - ₹20,000</option>
             </select>
           </div>
         </div>
+
         <div className="only-sorting--div">
           <select
             name="Sort_by"
             value={filteredData.Sort_by}
             onChange={SelectFilters}
           >
-            <option value="featured" disabled>
-              Featured
-            </option>
-            <option selected>Sort by : Feature</option>
+            <option value="">Sort by : Feature</option>
             <option value="Lowest">
               <span>Price: </span> Lowest
             </option>
@@ -350,57 +320,66 @@ const Home = () => {
       </div>
       {/*filtersANDSortings div End  */}
 
-      {AllData && AllData.length > 0 ? (
-        <div className="allProduct--container">
+
+
+      {AllData.length > 0  ? (
+        <div
+          className="allProduct--container"
+          style={{ border: "2px solid red" }}
+        >
           <div
             className={
               gridBLACK || screenWidth <= 480
                 ? "allProduct--container--Child"
                 : "LineView--Activate"
             }
+            style={{ border: "2px solid blue" }}
           >
-            {AllData &&
-              AllData.map((obj, i) => (
-                <>
-                  <div
-                    className="Asingle--Product--div"
-                    key={obj._id}
-                    storekey={obj._id}
-                    onClick={() => clickAproduct(obj._id)}
-                  >
-                    <div className="blueColor" key={obj._id}>
-                      <img src={obj.ProdectImage} alt="productImg" />
-                      <div
-                        className="cartDIV"
-                        style={{ display: !isLoggedIn && "none" }}
-                        onClick={(event) => ClickAddToCart(event, obj)}
-                      >
-                        <i className="fa-solid fa-cart-plus"></i>
-                      </div>
-                    </div>
-                    <div className="productDetails" key={i}>
-                      <p className="productName--model">
-                        <span className="productName">{obj.Company}</span>
-                        <span className="model"> {obj.Model} </span>
-                      </p>
-                      <p className="price">
-                        Price- ₹<span> {obj.Productprice}</span>
-                      </p>
-                      <p className="color--and--type">
-                        <span className="color">{obj.ProductColor} </span>
-                        <span className="color">| {obj.Heaadphonetype}</span>
-                      </p>
-                      <p className="HeadLine">{obj.Productheadline}</p>
-                      <button className="Details">Details</button>
+            {AllData.map((obj, i) => (
+              <>
+                <div
+                  className="Asingle--Product--div"
+                  key={obj._id}
+                  storekey={obj._id}
+                  onClick={() => clickAproduct(obj._id)}
+                  style={{ border: "2px solid green" }}
+                >
+                  <div className="blueColor" key={obj._id}>
+                    <img src={obj.ProdectImage} alt="productImg" />
+                    <div
+                      className="cartDIV"
+                      style={{ display: !isLoggedIn && "none" }}
+                      onClick={(event) => ClickAddToCart(event, obj)}
+                    >
+                      <i className="fa-solid fa-cart-plus"></i>
                     </div>
                   </div>
-                </>
-              ))}
+                  <div className="productDetails" key={i}>
+                    <p className="productName--model">
+                      <span className="productName">{obj.Company}</span>
+                      <span className="model"> {obj.Model} </span>
+                    </p>
+                    <p className="price">
+                      Price- ₹<span> {obj.Productprice}</span>
+                    </p>
+                    <p className="color--and--type">
+                      <span className="color">{obj.ProductColor} </span>
+                      <span className="color">| {obj.Heaadphonetype}</span>
+                    </p>
+                    <p className="HeadLine">{obj.Productheadline}</p>
+                    <button className="Details">Details</button>
+                  </div>
+                </div>
+              </>
+            ))}
           </div>
         </div>
-      ) : (
+      ) : AllData.message ? <center>{AllData.message}</center> : (
         <center className="loadingImg">
-          <img src="https://www.pcb.com/contentstore/images/pcb_corporate/supportingimages/loader.gif" alt="" />{" "}
+          <img
+            src="https://www.pcb.com/contentstore/images/pcb_corporate/supportingimages/loader.gif"
+            alt=""
+          />{" "}
         </center>
       )}
 
