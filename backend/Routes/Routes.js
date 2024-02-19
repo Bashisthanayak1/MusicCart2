@@ -6,13 +6,10 @@ import {
   getUserDetails,
   updateQuantity,
   emptyCart,
-  test
+  test,
 } from "../controllers/userController.js";
 import isAuthenticated from "../middlewares/jwt.js";
-import {
-  filterProduct,
-  productById,
-} from "../controllers/allProducts.js";
+import { filterProduct, productById } from "../controllers/allProducts.js";
 
 const router = express.Router();
 
@@ -21,8 +18,6 @@ router.get("/", test);
 router.post("/login", loginRoute);
 
 router.post("/signup", signupRoute);
-
-
 
 // to get all products data
 router.get("/getProduct", filterProduct);
