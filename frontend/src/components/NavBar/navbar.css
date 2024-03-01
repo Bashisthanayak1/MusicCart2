@@ -3,9 +3,10 @@ body {
   padding: 0;
 }
 .homePage--Navbar {
-  border: 1px solid transparent;
-  width: 100vw;
+    /* border: 1px solid red; */
+  /* width: 98vw; */
   height: auto;
+  margin: auto;
 }
 .homePage--Navbar > img {
   width: 100%;
